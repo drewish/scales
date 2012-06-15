@@ -32,23 +32,23 @@
                                 </connections>
                             </segmentedControl>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" momentary="YES" id="zsD-Cs-aWG">
-                                <rect key="frame" x="159" y="346" width="121" height="44"/>
+                                <rect key="frame" x="148" y="346" width="143" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <segments>
-                                    <segment title="F#"/>
-                                    <segment title="G#"/>
-                                    <segment title="A#"/>
+                                    <segment title="F♯"/>
+                                    <segment title="G♯"/>
+                                    <segment title="A♯"/>
                                 </segments>
                                 <connections>
                                     <action selector="pressed:" destination="2" eventType="valueChanged" id="NAB-tP-uHL"/>
                                 </connections>
                             </segmentedControl>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" momentary="YES" id="SVR-Ac-5nJ">
-                                <rect key="frame" x="38" y="346" width="80" height="44"/>
+                                <rect key="frame" x="33" y="346" width="91" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <segments>
-                                    <segment title="C#"/>
-                                    <segment title="D#"/>
+                                    <segment title="C♯"/>
+                                    <segment title="D♯"/>
                                 </segments>
                                 <connections>
                                     <action selector="pressed:" destination="2" eventType="valueChanged" id="MKk-qE-nVS"/>
@@ -90,19 +90,6 @@
         <image name="FClef.png" width="200" height="222"/>
         <image name="GClef.png" width="200" height="547"/>
     </resources>
-    <classes>
-        <class className="ScaleNoteView" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ScaleNoteView.h"/>
-        </class>
-        <class className="ViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="octaveChange:"/>
-                <relationship kind="action" name="pressed:"/>
-                <relationship kind="outlet" name="scaleView" candidateClass="ScaleNoteView"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
