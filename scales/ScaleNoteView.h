@@ -10,6 +10,7 @@
 
 @interface ScaleNoteView : UIView
 @property NSString *note;
-@property NSNumber *octave;
+@property NSInteger octave;
+@property CGFloat x;
 
 @end

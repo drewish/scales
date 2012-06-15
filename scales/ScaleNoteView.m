@@ -7,12 +7,14 @@
 //
 
 #import "ScaleNoteView.h"
+#include <stdlib.h>
 
 @implementation ScaleNoteView
 
 // This should probably end up in a model.
-@synthesize note;
-@synthesize octave;
+@synthesize note = note_;
+@synthesize octave = octave_;
+@synthesize x = x_;
 
 NSInteger spacing = 15;
 
@@ -22,41 +24,9 @@ NSInteger spacing = 15;
     if (self) {
         // Initialization code
         self.note = @"c";
-        self.octave = [NSNumber numberWithInt:4];
+        self.octave = 4;
     }
     return self;
-}
-
-// TODO: I'm not using this yet but I started on it thinking I'd convert stuff 
-// to semi tones.
-- (NSInteger)seimtoneFromNote:(NSString*)n
-{
-    if ([n isEqualToString:@"c"])
-        return 0;
-    else if ([n isEqualToString:@"c♯"] || [n isEqualToString:@"d♭"])
-        return 1;
-    else if ([n isEqualToString:@"d"])
-        return 2;
-    else if ([n isEqualToString:@"d♯"] || [n isEqualToString:@"e♭"])
-        return 3;
-    else if ([n isEqualToString:@"e"])
-        return 4;
-    else if ([n isEqualToString:@"f"])
-        return 5;
-    else if ([n isEqualToString:@"f♯"] || [n isEqualToString:@"g♭"])
-        return 6;
-    else if ([n isEqualToString:@"g"])
-        return 7;
-    else if ([n isEqualToString:@"g♯"] || [n isEqualToString:@"a♭"])
-        return 8;
-    else if ([n isEqualToString:@"a"])
-        return 9;
-    else if ([n isEqualToString:@"a♯"] || [n isEqualToString:@"b♭"])
-        return 10;
-    else if ([n isEqualToString:@"b"])
-        return 11;
-    else
-        return -1;
 }
 
 - (CGFloat)spotOfLine:(NSInteger) i
@@ -149,8 +119,25 @@ NSInteger spacing = 15;
     [line stroke];
 }
 
+- (void)drawAccidental:(NSString*)accidental atSpot:(CGFloat) spot andX:(CGFloat) x
+{
+    UIFont *font = [UIFont fontWithName:@"CourierNewPS-BoldMT" size:36];
+    CGSize textSize = [accidental sizeWithFont:font];
+    CGPoint textPoint = CGPointMake(x, [self yOfSpot:spot]);
+    if ([accidental isEqualToString:@"♯"]) {
+        textPoint.x -= textSize.width + 10;
+        textPoint.y -= textSize.height / 2.1;
+    }
+    if ([accidental isEqualToString:@"♭"]) {
+        textPoint.x -= textSize.width + 5;
+        textPoint.y -= textSize.height / 1.75;
+    }
+    // Not going to worry about ♮ yet.
+    [accidental drawAtPoint:textPoint withFont:font];
+}
+
 // Draw a note at a given x coordinate. The note can have an accidental.
-- (void)drawNote:(NSString*)n octave:(NSInteger) o atX:(CGFloat) x
+- (void)drawNote:(NSString*)n inOctave:(NSInteger) o atX:(CGFloat) x
 {
     CGFloat spot = [self spotOfNote:n octave:o];
     CGSize size = CGSizeMake(22, 15);
@@ -164,26 +151,10 @@ NSInteger spacing = 15;
     [wholeNote fill];
     
     if (n.length == 2) {
-        NSString *accidental = [n substringWithRange:NSMakeRange(1, 1)];
-        UIFont *font = [UIFont fontWithName:@"CourierNewPS-BoldMT" size:36];
-        CGSize textSize = [accidental sizeWithFont:font];
-        CGPoint textPoint = center;
-        if ([accidental isEqualToString:@"♯"]) {
-            textPoint.x -= textSize.width + 10;
-            textPoint.y -= textSize.height / 2.1;
-        }
-        if ([accidental isEqualToString:@"♭"]) {
-            textPoint.x -= textSize.width + 5;
-            textPoint.y -= textSize.height / 1.75;
-        }
-        // Not going to worry about ♮ yet.
-        [accidental drawAtPoint:textPoint withFont:font];
+        [self drawAccidental:[n substringWithRange:NSMakeRange(1, 1)] atSpot:spot andX:x];
     }
     
-    // TODO: if we're above or below the staff add leger lines.
-    if (spot < 1 || spot > 5) {
-        [self drawLegerLinesToSpot:spot atX:x];
-    }
+    [self drawLegerLinesToSpot:spot atX:x];
 }
 
 // Only override drawRect: if you perform custom drawing.
@@ -192,11 +163,10 @@ NSInteger spacing = 15;
 {
     [self drawStaff];
 
-    NSLog(@"%@%@", note, octave);
-    [self drawNote:note octave:[octave integerValue] atX:100];
+    [self drawNote:note_ inOctave:octave_ atX:x_];
 
-//    [self drawNote:@"b♭" octave:4 atX:150];
-//    [self drawNote:@"a♯" octave:4 atX:200];
+//    [self drawNote:@"b♭" inOctave:4 atX:150];
+//    [self drawNote:@"a♯" inOctave:4 atX:200];
 }
 
 @end

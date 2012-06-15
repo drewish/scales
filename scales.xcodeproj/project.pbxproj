@@ -18,6 +18,7 @@
 		5F2F317F158AF47E00689F4D /* ScaleNoteView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F2F317E158AF47D00689F4D /* ScaleNoteView.m */; };
 		5F2F3182158AFAEE00689F4D /* FClef.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F2F3180158AFAEE00689F4D /* FClef.png */; };
 		5F2F3183158AFAEE00689F4D /* GClef.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F2F3181158AFAEE00689F4D /* GClef.png */; };
+		5F30FD79158BDC8A0064F430 /* Notes.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F30FD78158BDC8A0064F430 /* Notes.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,8 @@
 		5F2F317E158AF47D00689F4D /* ScaleNoteView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScaleNoteView.m; sourceTree = "<group>"; };
 		5F2F3180158AFAEE00689F4D /* FClef.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FClef.png; sourceTree = "<group>"; };
 		5F2F3181158AFAEE00689F4D /* GClef.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GClef.png; sourceTree = "<group>"; };
+		5F30FD77158BDC8A0064F430 /* Notes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Notes.h; sourceTree = "<group>"; };
+		5F30FD78158BDC8A0064F430 /* Notes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Notes.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +97,8 @@
 				5F2F3173158AEF6700689F4D /* ViewController.h */,
 				5F2F3174158AEF6700689F4D /* ViewController.m */,
 				5F2F3165158AEF6600689F4D /* Supporting Files */,
+				5F30FD77158BDC8A0064F430 /* Notes.h */,
+				5F30FD78158BDC8A0064F430 /* Notes.m */,
 			);
 			path = scales;
 			sourceTree = "<group>";
@@ -177,6 +182,7 @@
 				5F2F316F158AEF6700689F4D /* AppDelegate.m in Sources */,
 				5F2F3175158AEF6700689F4D /* ViewController.m in Sources */,
 				5F2F317F158AF47E00689F4D /* ScaleNoteView.m in Sources */,
+				5F30FD79158BDC8A0064F430 /* Notes.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -288,6 +294,7 @@
 				5F2F317A158AEF6700689F4D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
