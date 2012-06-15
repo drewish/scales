@@ -13,6 +13,7 @@
 @end
 
 @implementation ViewController
+@synthesize scaleView;
 
 - (void)viewDidLoad
 {
@@ -22,6 +23,7 @@
 
 - (void)viewDidUnload
 {
+    [self setScaleView:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -31,4 +33,15 @@
     return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
 }
 
+- (IBAction)pressed:(id)sender {
+    UISegmentedControl *s = (UISegmentedControl *)sender;
+    scaleView.note = [[s titleForSegmentAtIndex:s.selectedSegmentIndex] lowercaseString];
+    [scaleView setNeedsDisplay];
+}
+
+- (IBAction)octaveChange:(id)sender {
+    UIStepper *s = (UIStepper *)sender;
+    scaleView.octave = [NSNumber numberWithDouble: [s value]];
+    [scaleView setNeedsDisplay];
+}
 @end

@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ScaleNoteView.h"
 
 @interface ViewController : UIViewController
+@property (weak, nonatomic) IBOutlet ScaleNoteView *scaleView;
+- (IBAction)pressed:(id)sender;
+- (IBAction)octaveChange:(id)sender;
 
 @end

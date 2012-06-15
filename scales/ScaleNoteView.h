@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface ScaleNoteView : UIView
+@property NSString *note;
+@property NSNumber *octave;
 
 @end

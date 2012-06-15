@@ -15,7 +15,7 @@
                         <rect key="frame" x="0.0" y="20" width="320" height="460"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" momentary="YES" id="mOd-Gp-47I">
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" momentary="YES" id="mOd-Gp-47I" userLabel="Naturals">
                                 <rect key="frame" x="20" y="397" width="280" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <segments>
@@ -27,6 +27,9 @@
                                     <segment title="A"/>
                                     <segment title="B"/>
                                 </segments>
+                                <connections>
+                                    <action selector="pressed:" destination="2" eventType="valueChanged" id="x4w-he-LIE"/>
+                                </connections>
                             </segmentedControl>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" momentary="YES" id="zsD-Cs-aWG">
                                 <rect key="frame" x="159" y="346" width="121" height="44"/>
@@ -36,6 +39,9 @@
                                     <segment title="G#"/>
                                     <segment title="A#"/>
                                 </segments>
+                                <connections>
+                                    <action selector="pressed:" destination="2" eventType="valueChanged" id="NAB-tP-uHL"/>
+                                </connections>
                             </segmentedControl>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" momentary="YES" id="SVR-Ac-5nJ">
                                 <rect key="frame" x="38" y="346" width="80" height="44"/>
@@ -44,25 +50,38 @@
                                     <segment title="C#"/>
                                     <segment title="D#"/>
                                 </segments>
+                                <connections>
+                                    <action selector="pressed:" destination="2" eventType="valueChanged" id="MKk-qE-nVS"/>
+                                </connections>
                             </segmentedControl>
                             <view contentMode="scaleToFill" id="Qat-yq-2FD" customClass="ScaleNoteView">
-                                <rect key="frame" x="20" y="42" width="280" height="247"/>
+                                <rect key="frame" x="20" y="20" width="280" height="272"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" image="FClef.png" id="5If-MK-XtH" userLabel="FClef">
-                                        <rect key="frame" x="5" y="27" width="45" height="56"/>
+                                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="FClef.png" id="5If-MK-XtH" userLabel="FClef">
+                                        <rect key="frame" x="5" y="72" width="45" height="56"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     </imageView>
-                                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="GClef.png" id="YqU-bK-uZC" userLabel="GClef">
-                                        <rect key="frame" x="5" y="12" width="45" height="103"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" image="GClef.png" id="YqU-bK-uZC" userLabel="GClef">
+                                        <rect key="frame" x="5" y="57" width="45" height="103"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
+                            <stepper opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="4" minimumValue="3" maximumValue="6" id="Qzt-cv-bRK">
+                                <rect key="frame" x="20" y="300" width="94" height="27"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <connections>
+                                    <action selector="octaveChange:" destination="2" eventType="valueChanged" id="fIq-DR-MDq"/>
+                                </connections>
+                            </stepper>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="scaleView" destination="Qat-yq-2FD" id="hyR-L1-iN1"/>
+                    </connections>
                 </viewController>
             </objects>
         </scene>
@@ -77,6 +96,11 @@
         </class>
         <class className="ViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="octaveChange:"/>
+                <relationship kind="action" name="pressed:"/>
+                <relationship kind="outlet" name="scaleView" candidateClass="ScaleNoteView"/>
+            </relationships>
         </class>
     </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
