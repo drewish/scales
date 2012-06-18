@@ -1,0 +1,24 @@
+Visuals:
+	- Display a +1 next to the note when they get a point.
+	- SVG graphics
+	- Show correct clef based on the ScaleNoteView's showTreble property @done
+	- Add label for game mode (Match note, transpose, match key)
+
+Game Play:
+	- Don't show same option after they guess it correctly.
+	- Pause button
+	- Limit notes to scale
+	- Separate speed for each note. Speed differs per option
+	- Use labels based off notes in scale.
+	- Fine tune acceleration
+Data Model:
+	Series:
+		- C, D, E, F, G, A, Bb
+		- 
+	Question:
+		- 
+Audio:
+	- Tone for each note
+Archive:
+	- Let the ScaleNoteView manage a moving note. Give it a 0.0-1.0 range and have it move the note. @done @project(Scales App)
+	- Correctly place notes on bass clef @done @project(Scales App)
