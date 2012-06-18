@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Lesson.h"
 
 @interface ScaleNoteView : UIView
-@property NSString *note;
-@property NSInteger octave;
-@property CGFloat x;
+@property Lesson *lesson;
+@property NSInteger octaveOffset;
+@property bool showTreble;
 
 @end

@@ -7,14 +7,14 @@
 //
 
 #import "ScaleNoteView.h"
-#include <stdlib.h>
+#import "Lesson.h"
 
 @implementation ScaleNoteView
 
 // This should probably end up in a model.
-@synthesize note = note_;
-@synthesize octave = octave_;
-@synthesize x = x_;
+@synthesize octaveOffset;
+@synthesize showTreble = isTreble_;
+@synthesize lesson;
 
 NSInteger spacing = 15;
 
@@ -23,8 +23,6 @@ NSInteger spacing = 15;
     self = [super initWithCoder:aDecoder];
     if (self) {
         // Initialization code
-        self.note = @"c";
-        self.octave = 4;
     }
     return self;
 }
@@ -45,15 +43,21 @@ NSInteger spacing = 15;
 }
 
 // Gives a spot back for a note at an octave.
-// Octave should be between 1-6 but we only really handle 4-6 at this point.
-// TODO: the lower stuff is crazy out of bounds. we should just switch the
-//   clef for the low ones
+// Octave should be between 1-6.
 // TODO: redo this and yOfSpot to be saner in terms of starting points.
 - (CGFloat)spotOfNote:(NSString*)n octave:(NSInteger)o
 {
-    // The 6 is there because C6 lines up to the top of our view currently. So
-    // we move down to find C in the octave...
-    CGFloat spot = (6 - o) * 3.5 + 1;
+    CGFloat spot;
+
+    // So we move down to find C in the octave...
+    if (isTreble_) {
+        // The 6 is there because C6 lines up two ledger lines from the top
+        spot = (6 - o) * 3.5 + 1;
+    }
+    else {
+        // Bass cleff C4 is ??? lines above the first line.
+        spot = (4 - o) * 3.5 + 2;
+    }
     // ...then move it upwards for a specific note.
     NSString *letter = [n substringToIndex:1];
     if ([letter isEqualToString:@"d"]) {
@@ -89,6 +93,16 @@ NSInteger spacing = 15;
     [staff moveToPoint:CGPointMake(w - 1, [self yOfSpot:[self spotOfLine:1]])];
     [staff addLineToPoint:CGPointMake(w - 1, [self yOfSpot:[self spotOfLine:5]])];
     [staff stroke];
+    // Put the clef mark on.
+    UIImage *img;
+    if (isTreble_) {
+        img = [UIImage imageNamed:@"GClef.png"];
+        [img drawInRect:CGRectMake(5, 57, 45, 103)];
+    }
+    else {
+        img = [UIImage imageNamed:@"FClef.png"];
+        [img drawInRect:CGRectMake(5, 72, 45, 56)];
+    }
 }
 
 // TODO: maybe we should pass in the width of the note?
@@ -137,9 +151,9 @@ NSInteger spacing = 15;
 }
 
 // Draw a note at a given x coordinate. The note can have an accidental.
-- (void)drawNote:(NSString*)n inOctave:(NSInteger) o atX:(CGFloat) x
+- (void)drawNote:(Note*)n inOctave:(NSInteger) o atX:(CGFloat) x
 {
-    CGFloat spot = [self spotOfNote:n octave:o];
+    CGFloat spot = [self spotOfNote:n.letter octave:o];
     CGSize size = CGSizeMake(22, 15);
     CGPoint center = CGPointMake(x, [self yOfSpot:spot]);
     CGRect outterBounds = CGRectMake(center.x - (size.width / 2), center.y - (size.height / 2), size.width, size.height);
@@ -150,8 +164,8 @@ NSInteger spacing = 15;
     wholeNote.usesEvenOddFillRule = YES;
     [wholeNote fill];
     
-    if (n.length == 2) {
-        [self drawAccidental:[n substringWithRange:NSMakeRange(1, 1)] atSpot:spot andX:x];
+    if (n.accidental.length > 0) {
+        [self drawAccidental:n.accidental atSpot:spot andX:x];
     }
     
     [self drawLegerLinesToSpot:spot atX:x];
@@ -163,7 +177,12 @@ NSInteger spacing = 15;
 {
     [self drawStaff];
 
-    [self drawNote:note_ inOctave:octave_ atX:x_];
+    // Convert the progress into a x coordinate. Subtract the space for the clef.
+    CGFloat w = [self frame].size.width;
+    CGFloat x = w - (lesson.progress * (w - 75));
+    [self drawNote:lesson.currentNote
+          inOctave:[lesson.currentNote.octave integerValue] + self.octaveOffset 
+               atX:x];
 
 //    [self drawNote:@"b♭" inOctave:4 atX:150];
 //    [self drawNote:@"a♯" inOctave:4 atX:200];

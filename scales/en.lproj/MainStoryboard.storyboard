@@ -57,19 +57,9 @@
                             <view contentMode="scaleToFill" id="Qat-yq-2FD" customClass="ScaleNoteView">
                                 <rect key="frame" x="20" y="20" width="280" height="272"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="FClef.png" id="5If-MK-XtH" userLabel="FClef">
-                                        <rect key="frame" x="5" y="72" width="45" height="56"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" image="GClef.png" id="YqU-bK-uZC" userLabel="GClef">
-                                        <rect key="frame" x="5" y="57" width="45" height="103"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    </imageView>
-                                </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
-                            <stepper opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="4" minimumValue="3" maximumValue="6" id="Qzt-cv-bRK">
+                            <stepper opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="3" maximumValue="6" id="Qzt-cv-bRK">
                                 <rect key="frame" x="20" y="300" width="94" height="27"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <connections>
@@ -92,12 +82,9 @@
                     </connections>
                 </viewController>
             </objects>
+            <point key="canvasLocation" x="-64" y="11"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="FClef.png" width="200" height="222"/>
-        <image name="GClef.png" width="200" height="547"/>
-    </resources>
     <classes>
         <class className="ScaleNoteView" superclassName="UIView">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ScaleNoteView.h"/>
