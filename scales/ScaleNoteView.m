@@ -106,7 +106,7 @@ NSInteger spacing = 15;
 }
 
 // TODO: maybe we should pass in the width of the note?
-- (void)drawLegerLinesToSpot:(CGFloat)spot atX:(CGFloat)x
+- (void)drawLedgerLinesToSpot:(CGFloat)spot atX:(CGFloat)x
 {
     NSInteger top = [self spotOfLine:1],
         bottom = [self spotOfLine:5],
@@ -168,7 +168,7 @@ NSInteger spacing = 15;
         [self drawAccidental:n.accidental atSpot:spot andX:x];
     }
     
-    [self drawLegerLinesToSpot:spot atX:x];
+    [self drawLedgerLinesToSpot:spot atX:x];
 }
 
 // Only override drawRect: if you perform custom drawing.

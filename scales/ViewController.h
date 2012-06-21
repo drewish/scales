@@ -13,7 +13,6 @@
 @property (weak, nonatomic) IBOutlet ScaleNoteView *scaleView;
 @property (weak, nonatomic) IBOutlet UILabel *streakLabel;
 - (IBAction)pressed:(id)sender;
-- (IBAction)octaveChange:(id)sender;
 - (IBAction)guessWrong:(id)sender;
 - (IBAction)guessRight:(id)sender;
 

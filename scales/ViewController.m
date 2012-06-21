@@ -27,22 +27,26 @@ Lesson *lesson;
 	// Do any additional setup after loading the view, typically from a nib.
     
     delta = 5;
+
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];    
+    NSInteger octave = [prefs integerForKey:@"octave"];
+
     
     lesson = [Lesson new];
     lesson.notes = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                     // C Blues scale.
-                    [Note noteFromLetter:@"c" inOctave:4], @"C",
-                    [Note noteFromLetter:@"e" accidental:@"b" inOctave:4], @"E♭",
-                    [Note noteFromLetter:@"f" inOctave:4], @"F",
-                    [Note noteFromString:@"gb4"], @"G♭",
-                    [Note noteFromLetter:@"b" accidental:@"♭" inOctave:4], @"B♭",
-                    [Note noteFromLetter:@"C" inOctave:5], @"C",
+                    [Note noteFromLetter:@"c" inOctave:octave], @"C",
+                    [Note noteFromLetter:@"e" accidental:@"b" inOctave:octave], @"E♭",
+                    [Note noteFromLetter:@"f" inOctave:octave], @"F",
+                    [Note noteFromLetter:@"gb" inOctave:octave], @"G♭",
+                    [Note noteFromLetter:@"b" accidental:@"♭" inOctave:octave], @"B♭",
+                    [Note noteFromLetter:@"C" inOctave:octave + 1], @"C",
                     nil];
     lesson.progress = 0.0;
     //lesson.currentNote = @"c4";
     [lesson pickRandomNote];
     
-    scaleView.showTreble = true;
+    scaleView.showTreble = [prefs boolForKey:@"isTreble"];
     scaleView.octaveOffset = 0;
     scaleView.lesson = lesson;
     
@@ -77,13 +81,6 @@ Lesson *lesson;
     else {
         [self guessWrong:self];
     }
-}
-
-- (IBAction)octaveChange:(id)sender {
-    UIStepper *s = (UIStepper *)sender;
-    scaleView.octaveOffset = [s value];
-    
-    [scaleView setNeedsDisplay];
 }
 
 - (IBAction)guessWrong:(id)sender {

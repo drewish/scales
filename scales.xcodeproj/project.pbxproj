@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5F26E0C41592CD93001A3014 /* SetupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F26E0C31592CD93001A3014 /* SetupViewController.m */; };
 		5F2F315F158AEF6600689F4D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F2F315E158AEF6600689F4D /* UIKit.framework */; };
 		5F2F3161158AEF6600689F4D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F2F3160158AEF6600689F4D /* Foundation.framework */; };
 		5F2F3163158AEF6600689F4D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F2F3162158AEF6600689F4D /* CoreGraphics.framework */; };
@@ -23,6 +24,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5F26E0C21592CD93001A3014 /* SetupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetupViewController.h; sourceTree = "<group>"; };
+		5F26E0C31592CD93001A3014 /* SetupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetupViewController.m; sourceTree = "<group>"; };
 		5F2F315A158AEF6600689F4D /* scales.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = scales.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F2F315E158AEF6600689F4D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		5F2F3160158AEF6600689F4D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -92,9 +95,9 @@
 			children = (
 				5F2F3180158AFAEE00689F4D /* FClef.png */,
 				5F2F3181158AFAEE00689F4D /* GClef.png */,
-				5F2F316D158AEF6700689F4D /* AppDelegate.h */,
-				5F2F316E158AEF6700689F4D /* AppDelegate.m */,
 				5F2F3170158AEF6700689F4D /* MainStoryboard.storyboard */,
+				5F26E0C21592CD93001A3014 /* SetupViewController.h */,
+				5F26E0C31592CD93001A3014 /* SetupViewController.m */,
 				5F2F3173158AEF6700689F4D /* ViewController.h */,
 				5F2F3174158AEF6700689F4D /* ViewController.m */,
 				5F2F317D158AF47D00689F4D /* ScaleNoteView.h */,
@@ -111,6 +114,8 @@
 		5F2F3165158AEF6600689F4D /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				5F2F316D158AEF6700689F4D /* AppDelegate.h */,
+				5F2F316E158AEF6700689F4D /* AppDelegate.m */,
 				5F2F3166158AEF6600689F4D /* scales-Info.plist */,
 				5F2F3167158AEF6600689F4D /* InfoPlist.strings */,
 				5F2F316A158AEF6600689F4D /* main.m */,
@@ -189,6 +194,7 @@
 				5F2F317F158AF47E00689F4D /* ScaleNoteView.m in Sources */,
 				5FC0D8CE158E36F0007A8263 /* Lesson.m in Sources */,
 				5FC0D8D6158EC520007A8263 /* Note.m in Sources */,
+				5F26E0C41592CD93001A3014 /* SetupViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

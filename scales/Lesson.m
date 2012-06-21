@@ -45,5 +45,5 @@
 {
     return [currentNote isEqual:guess];
 }
-                         
+                      
 @end

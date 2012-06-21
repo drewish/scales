@@ -1,3 +1,7 @@
+App Flow:
+	- Add settings form
+	- Table view for picking scales
+	- Draw the scale they'll be practicing with as they configure it.  
 Visuals:
 	- Display a +1 next to the note when they get a point.
 	- SVG graphics
@@ -12,7 +16,7 @@ Game Play:
 	- Use labels based off notes in scale.
 	- Fine tune acceleration
 Data Model:
-	Series:
+	Lesson:
 		- C, D, E, F, G, A, Bb
 		- 
 	Question:
