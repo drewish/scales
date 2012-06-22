@@ -3,7 +3,7 @@
 //  scales
 //
 //  Created by andrew morton on 6/17/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2012 drewish.com. All rights reserved.
 //
 
 #import "Note.h"
