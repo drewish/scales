@@ -97,11 +97,11 @@ NSInteger spacing = 15;
     UIImage *img;
     if (lesson.showTreble) {
         img = [UIImage imageNamed:@"GClef.png"];
-        [img drawInRect:CGRectMake(5, 57, 45, 103)];
+        [img drawInRect:CGRectMake(5, 57, 37, 103)];
     }
     else {
         img = [UIImage imageNamed:@"FClef.png"];
-        [img drawInRect:CGRectMake(5, 72, 45, 56)];
+        [img drawInRect:CGRectMake(5, 76, 40, 45)];
     }
 }
 
