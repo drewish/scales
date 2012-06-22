@@ -36,7 +36,7 @@
             </objects>
             <point key="canvasLocation" x="588" y="-382"/>
         </scene>
-        <!--View Controller-->
+        <!--View Controller - Guess The Note-->
         <scene sceneID="5">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4" sceneMemberID="firstResponder"/>
@@ -100,6 +100,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                     </view>
+                    <navigationItem key="navigationItem" title="Guess The Note" id="Wlp-tb-gzc"/>
                     <connections>
                         <outlet property="scaleView" destination="Qat-yq-2FD" id="hyR-L1-iN1"/>
                         <outlet property="streakLabel" destination="Dc8-Jr-lys" id="mjw-Zd-cz2"/>
@@ -108,7 +109,7 @@
             </objects>
             <point key="canvasLocation" x="588" y="229"/>
         </scene>
-        <!--Setup View Controller - Notes-->
+        <!--Setup View Controller - What to do?-->
         <scene sceneID="sZK-n8-9Dz">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="byQ-HN-jlr" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -121,7 +122,7 @@
                             <tableViewSection headerTitle="Scale" id="8ke-Zi-5aP">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="NX2-hH-Kw6" style="IBUITableViewCellStyleDefault" id="UhW-M1-mbg">
-                                        <rect key="frame" x="0.0" y="137" width="320" height="46"/>
+                                        <rect key="frame" x="0.0" y="46" width="320" height="46"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="10" y="1" width="280" height="43"/>
@@ -138,7 +139,7 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <connections>
-                                            <segue destination="VEQ-WD-Kx5" kind="push" id="GZD-p0-jzv"/>
+                                            <segue destination="VEQ-WD-Kx5" kind="push" identifier="pickScale" id="GZD-p0-jzv"/>
                                         </connections>
                                     </tableViewCell>
                                 </cells>
@@ -146,7 +147,7 @@
                             <tableViewSection headerTitle="Clef" id="nA5-Di-wSl">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="43" id="rXy-WX-vZg">
-                                        <rect key="frame" x="0.0" y="46" width="320" height="45"/>
+                                        <rect key="frame" x="0.0" y="138" width="320" height="45"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="10" y="1" width="300" height="42"/>
@@ -219,7 +220,7 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <connections>
-                                            <segue destination="2" kind="push" id="wB3-Qa-GoM"/>
+                                            <segue destination="2" kind="push" identifier="goPlay" id="ORL-zS-vcw"/>
                                         </connections>
                                     </tableViewCell>
                                 </cells>
@@ -230,7 +231,7 @@
                             <outlet property="delegate" destination="Utt-X0-4K3" id="dVd-o3-Sor"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Notes" id="F2W-gS-UKC"/>
+                    <navigationItem key="navigationItem" title="What to do?" id="F2W-gS-UKC"/>
                     <connections>
                         <outlet property="clefControl" destination="Tmq-vT-cvc" id="RTQ-HA-Je9"/>
                         <outlet property="octaveControl" destination="SLi-wQ-e2Z" id="owB-oM-KmQ"/>
@@ -258,30 +259,6 @@
             <point key="canvasLocation" x="-476" y="5"/>
         </scene>
     </scenes>
-    <classes>
-        <class className="ScaleNoteView" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ScaleNoteView.h"/>
-        </class>
-        <class className="SetupViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SetupViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="clefChanged:" candidateClass="UISegmentedControl"/>
-                <relationship kind="action" name="octaveChanged:" candidateClass="UISegmentedControl"/>
-                <relationship kind="outlet" name="clefControl" candidateClass="UISegmentedControl"/>
-                <relationship kind="outlet" name="octaveControl" candidateClass="UISegmentedControl"/>
-            </relationships>
-        </class>
-        <class className="ViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="guessRight:"/>
-                <relationship kind="action" name="guessWrong:"/>
-                <relationship kind="action" name="pressed:"/>
-                <relationship kind="outlet" name="scaleView" candidateClass="ScaleNoteView"/>
-                <relationship kind="outlet" name="streakLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

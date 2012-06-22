@@ -12,7 +12,11 @@
 @implementation Lesson
 @synthesize currentNote;
 @synthesize notes;
+@synthesize octave;
+@synthesize showTreble;
 @synthesize progress;
+@synthesize delta;
+@synthesize delegate;
 
 //
 //+ (NSInteger)randomSemitone
@@ -29,6 +33,7 @@
 {
     self = [super init];
     progress = 0.0;
+    delta = 5;
     currentNote = [Note noteFromString:@"c"];
     notes = [NSMutableDictionary new];
     return self;
@@ -45,5 +50,56 @@
 {
     return [currentNote isEqual:guess];
 }
-                      
+
+- (void)guess:(Note*)guess
+{
+    if ([self matchesGuess:guess]) {
+        [self guessedRight];
+    }
+    else {
+        [self guessedWrong];
+    }
+}
+
+- (void)guessedRight
+{
+    // Start again with a new piece.
+    progress = 0.0;
+    [self pickRandomNote];
+    // Spead it up a little bit.
+    //delta += 0.5;
+    [self.delegate guessedRight];
+}
+
+- (void)guessedWrong
+{
+    progress = -0.1;
+
+    // Make it a little easier.
+    if (delta > 5) {
+        delta = 2;
+    }
+    else if (delta > 2) {
+        delta *= 0.5;
+    }
+    // Make sure we don't stop.
+    if (delta <= 0) {
+        delta = 1;
+    }
+    [self.delegate guessedWrong];
+}
+
+- (void)timedOut
+{
+    progress = -0.1;
+    [self.delegate timedOut];
+}
+
+-(void)tick
+{
+    progress += (delta / 100);
+    if (progress >= 1.0) {
+        [self timedOut];
+    }
+}
 @end

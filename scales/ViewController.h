@@ -9,11 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "ScaleNoteView.h"
 
-@interface ViewController : UIViewController
+@interface ViewController : UIViewController<LessonDelegate>
 @property (weak, nonatomic) IBOutlet ScaleNoteView *scaleView;
 @property (weak, nonatomic) IBOutlet UILabel *streakLabel;
+@property Lesson *lesson;
+@property NSInteger streak;
 - (IBAction)pressed:(id)sender;
-- (IBAction)guessWrong:(id)sender;
-- (IBAction)guessRight:(id)sender;
 
 @end

@@ -13,7 +13,6 @@
 
 // This should probably end up in a model.
 @synthesize octaveOffset;
-@synthesize showTreble = isTreble_;
 @synthesize lesson;
 
 NSInteger spacing = 15;
@@ -23,6 +22,7 @@ NSInteger spacing = 15;
     self = [super initWithCoder:aDecoder];
     if (self) {
         // Initialization code
+        octaveOffset = 0;
     }
     return self;
 }
@@ -50,7 +50,7 @@ NSInteger spacing = 15;
     CGFloat spot;
 
     // So we move down to find C in the octave...
-    if (isTreble_) {
+    if (lesson.showTreble) {
         // The 6 is there because C6 lines up two ledger lines from the top
         spot = (6 - o) * 3.5 + 1;
     }
@@ -95,7 +95,7 @@ NSInteger spacing = 15;
     [staff stroke];
     // Put the clef mark on.
     UIImage *img;
-    if (isTreble_) {
+    if (lesson.showTreble) {
         img = [UIImage imageNamed:@"GClef.png"];
         [img drawInRect:CGRectMake(5, 57, 45, 103)];
     }

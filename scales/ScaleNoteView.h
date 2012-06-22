@@ -12,6 +12,5 @@
 @interface ScaleNoteView : UIView
 @property Lesson *lesson;
 @property NSInteger octaveOffset;
-@property bool showTreble;
 
 @end

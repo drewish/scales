@@ -7,6 +7,8 @@
 //
 
 #import "SetupViewController.h"
+#import "ViewController.h"
+#import "Lesson.h"
 
 @interface SetupViewController ()
 
@@ -32,12 +34,11 @@
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
-    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-    
     // Setup defaults.
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
     NSDictionary *defaults = [NSDictionary dictionaryWithObjectsAndKeys:
                                  [NSNumber numberWithInt:4], @"octave",
-//                                 true, @"isTreble",
+                                 [NSNumber numberWithBool:true], @"isTreble",
                                  nil];
     [prefs registerDefaults:defaults];
     
@@ -59,34 +60,56 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([[segue identifier] isEqualToString:@"goPlay"]) {
+        NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+        [prefs setBool:self.isTreble forKey:@"isTreble"];
+        [prefs setInteger:self.octave forKey:@"octave"];
+        [prefs synchronize];
+
+        Lesson *lesson = [Lesson new];
+        lesson.showTreble = self.isTreble;
+        lesson.octave = self.octave;
+        lesson.notes = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                        // C Blues scale.
+                        [Note noteFromLetter:@"c" inOctave:self.octave], @"C",
+                        [Note noteFromLetter:@"e" accidental:@"b" inOctave:self.octave], @"E♭",
+                        [Note noteFromLetter:@"f" inOctave:self.octave], @"F",
+                        [Note noteFromLetter:@"gb" inOctave:self.octave], @"G♭",
+                        [Note noteFromLetter:@"b" accidental:@"♭" inOctave:self.octave], @"B♭",
+                        [Note noteFromLetter:@"C" inOctave:self.octave + 1], @"C",
+                        nil];
+        [lesson pickRandomNote];
+        ViewController *vc = segue.destinationViewController;
+        vc.lesson = lesson;
+    }
+}
+
 # pragma mark All this stuff is too tangled up:
 
 - (IBAction)clefChanged:(UISegmentedControl *)sender {
+    // Make sure the octave is reasonable.
     if (self.isTreble && self.octave < 3) {
         self.octave = 3;
     }
     else if (!self.isTreble && self.octave > 4) {
         self.octave = 4;
     }
-    [[NSUserDefaults standardUserDefaults] setBool:self.isTreble forKey:@"isTreble"];
-    NSLog(sender.selectedSegmentIndex == 0 ? @"Treble" : @"Bass");
 }
 
 - (IBAction)octaveChanged:(UISegmentedControl *)sender {
-    unsigned short octave = octaveControl.selectedSegmentIndex + 1;
-    [[NSUserDefaults standardUserDefaults] setInteger:octave forKey:@"octave"];
-
     // Make sure low stuff end up in the bass clef...
-    if (octave < 3) {
+    if (self.octave < 3) {
         self.isTreble = false;
     }
     // ...and high stuff in the treble.
-    else if (octave > 4) {
+    else if (self.octave > 4) {
         self.isTreble = true;
     }
 }
 
-- (NSInteger)octave 
+- (NSInteger)octave
 {
     return octaveControl.selectedSegmentIndex + 1;
 }

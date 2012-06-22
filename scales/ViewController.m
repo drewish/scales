@@ -16,40 +16,18 @@
 @implementation ViewController
 @synthesize scaleView;
 @synthesize streakLabel;
+@synthesize lesson;
+@synthesize streak;
 NSTimer *timer;
-NSInteger streak;
-CGFloat delta;
-Lesson *lesson;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    
-    delta = 5;
 
-    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];    
-    NSInteger octave = [prefs integerForKey:@"octave"];
-
-    
-    lesson = [Lesson new];
-    lesson.notes = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                    // C Blues scale.
-                    [Note noteFromLetter:@"c" inOctave:octave], @"C",
-                    [Note noteFromLetter:@"e" accidental:@"b" inOctave:octave], @"E♭",
-                    [Note noteFromLetter:@"f" inOctave:octave], @"F",
-                    [Note noteFromLetter:@"gb" inOctave:octave], @"G♭",
-                    [Note noteFromLetter:@"b" accidental:@"♭" inOctave:octave], @"B♭",
-                    [Note noteFromLetter:@"C" inOctave:octave + 1], @"C",
-                    nil];
-    lesson.progress = 0.0;
-    //lesson.currentNote = @"c4";
-    [lesson pickRandomNote];
-    
-    scaleView.showTreble = [prefs boolForKey:@"isTreble"];
-    scaleView.octaveOffset = 0;
+    lesson.delegate = self;
     scaleView.lesson = lesson;
-    
+
     timer = [NSTimer scheduledTimerWithTimeInterval:0.2
                                      target:self
                                    selector:@selector(tick:)
@@ -73,56 +51,35 @@ Lesson *lesson;
 - (IBAction)pressed:(id)sender {
     UISegmentedControl *s = (UISegmentedControl *)sender;
     Note *choice = [Note noteFromString:[s titleForSegmentAtIndex:s.selectedSegmentIndex]];
-    if ([lesson matchesGuess:choice]) {
-        // Start again with a new piece.
-        [lesson pickRandomNote];
-        [self guessRight:self];
-    }
-    else {
-        [self guessWrong:self];
-    }
+    [lesson guess:choice];
 }
 
-- (IBAction)guessWrong:(id)sender {
-    // Give them a break then make them do it right.
-    lesson.progress = -0.1;
-    streak = 0;
-    streakLabel.text = [NSString stringWithFormat:@"%i", streak];
-    // Make it a little easier.
-    if (delta > 5) {
-        delta = 2;
-    } 
-    else if (delta > 2) {
-        delta *= 0.5;        
-    }
-    // Make sure we don't stop.
-    if (delta <= 0) {
-        delta = 1;
-    }
-    streakLabel.text = [NSString stringWithFormat:@"delta: %f", delta];
-
+- (void)tick:(NSTimer*)theTimer
+{
+    [lesson tick];
     [scaleView setNeedsDisplay];
 }
 
-- (IBAction)guessRight:(id)sender {
-    lesson.progress = 0.0;
+- (void)timedOut
+{
+    [self guessedWrong];
+}
+
+- (void)guessedRight
+{
     // Keep score
     streak += 1;
     streakLabel.text = [NSString stringWithFormat:@"%i", streak];
-    // Spead it up a little bit.
-    delta += 0.5;
-    
+
     [scaleView setNeedsDisplay];
 }
 
-- (void) tick:(NSTimer*)theTimer
+- (void)guessedWrong
 {
-    if (lesson.progress >= 1.0) {
-        [self guessWrong:self];
-    }
-    else {
-        lesson.progress += (delta / 100);        
-    }
+    // Give them a break then make them do it right.
+    streak = 0;
+    streakLabel.text = [NSString stringWithFormat:@"%i", streak];
+
     [scaleView setNeedsDisplay];
 }
 
