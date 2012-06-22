@@ -7,7 +7,7 @@
 //
 
 #import "SetupViewController.h"
-#import "ViewController.h"
+#import "PlayViewController.h"
 #import "Lesson.h"
 
 @interface SetupViewController ()
@@ -81,7 +81,7 @@
                         [Note noteFromLetter:@"C" inOctave:self.octave + 1], @"C",
                         nil];
         [lesson pickRandomNote];
-        ViewController *vc = segue.destinationViewController;
+        PlayViewController *vc = segue.destinationViewController;
         vc.lesson = lesson;
     }
 }

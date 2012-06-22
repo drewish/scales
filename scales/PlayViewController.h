@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "ScaleNoteView.h"
 
-@interface ViewController : UIViewController<LessonDelegate>
+@interface PlayViewController : UIViewController<LessonDelegate>
 @property (weak, nonatomic) IBOutlet ScaleNoteView *scaleView;
 @property (weak, nonatomic) IBOutlet UILabel *streakLabel;
 @property Lesson *lesson;

@@ -15,7 +15,7 @@
 		5F2F316B158AEF6700689F4D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F2F316A158AEF6600689F4D /* main.m */; };
 		5F2F316F158AEF6700689F4D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F2F316E158AEF6700689F4D /* AppDelegate.m */; };
 		5F2F3172158AEF6700689F4D /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5F2F3170158AEF6700689F4D /* MainStoryboard.storyboard */; };
-		5F2F3175158AEF6700689F4D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F2F3174158AEF6700689F4D /* ViewController.m */; };
+		5F2F3175158AEF6700689F4D /* PlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F2F3174158AEF6700689F4D /* PlayViewController.m */; };
 		5F2F317F158AF47E00689F4D /* ScaleNoteView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F2F317E158AF47D00689F4D /* ScaleNoteView.m */; };
 		5F2F3182158AFAEE00689F4D /* FClef.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F2F3180158AFAEE00689F4D /* FClef.png */; };
 		5F2F3183158AFAEE00689F4D /* GClef.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F2F3181158AFAEE00689F4D /* GClef.png */; };
@@ -37,8 +37,8 @@
 		5F2F316D158AEF6700689F4D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		5F2F316E158AEF6700689F4D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		5F2F3171158AEF6700689F4D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
-		5F2F3173158AEF6700689F4D /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		5F2F3174158AEF6700689F4D /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		5F2F3173158AEF6700689F4D /* PlayViewController.h */ = {isa = PBXFileReference; path = PlayViewController.h; sourceTree = "<group>"; };
+		5F2F3174158AEF6700689F4D /* PlayViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlayViewController.m; sourceTree = "<group>"; };
 		5F2F317D158AF47D00689F4D /* ScaleNoteView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScaleNoteView.h; sourceTree = "<group>"; };
 		5F2F317E158AF47D00689F4D /* ScaleNoteView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScaleNoteView.m; sourceTree = "<group>"; };
 		5F2F3180158AFAEE00689F4D /* FClef.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FClef.png; sourceTree = "<group>"; };
@@ -98,8 +98,8 @@
 				5F2F3170158AEF6700689F4D /* MainStoryboard.storyboard */,
 				5F26E0C21592CD93001A3014 /* SetupViewController.h */,
 				5F26E0C31592CD93001A3014 /* SetupViewController.m */,
-				5F2F3173158AEF6700689F4D /* ViewController.h */,
-				5F2F3174158AEF6700689F4D /* ViewController.m */,
+				5F2F3173158AEF6700689F4D /* PlayViewController.h */,
+				5F2F3174158AEF6700689F4D /* PlayViewController.m */,
 				5F2F317D158AF47D00689F4D /* ScaleNoteView.h */,
 				5F2F317E158AF47D00689F4D /* ScaleNoteView.m */,
 				5FC0D8D4158EC520007A8263 /* Note.h */,
@@ -190,7 +190,7 @@
 			files = (
 				5F2F316B158AEF6700689F4D /* main.m in Sources */,
 				5F2F316F158AEF6700689F4D /* AppDelegate.m in Sources */,
-				5F2F3175158AEF6700689F4D /* ViewController.m in Sources */,
+				5F2F3175158AEF6700689F4D /* PlayViewController.m in Sources */,
 				5F2F317F158AF47E00689F4D /* ScaleNoteView.m in Sources */,
 				5FC0D8CE158E36F0007A8263 /* Lesson.m in Sources */,
 				5FC0D8D6158EC520007A8263 /* Note.m in Sources */,

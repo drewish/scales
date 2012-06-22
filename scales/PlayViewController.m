@@ -6,14 +6,14 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "PlayViewController.h"
 #import "Lesson.h"
 
-@interface ViewController ()
+@interface PlayViewController ()
 
 @end
 
-@implementation ViewController
+@implementation PlayViewController
 @synthesize scaleView;
 @synthesize streakLabel;
 @synthesize lesson;
