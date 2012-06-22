@@ -16,12 +16,28 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="7ST-Y5-FKh">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="iZw-XE-BDC" detailTextLabel="rq4-MZ-Dxv" style="IBUITableViewCellStyleSubtitle" id="7ST-Y5-FKh">
                                 <rect key="frame" x="0.0" y="22" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Blues C" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="iZw-XE-BDC">
+                                            <rect key="frame" x="10" y="2" width="68" height="22"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="C, E♭, F, F♯, G, B♭" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="rq4-MZ-Dxv">
+                                            <rect key="frame" x="10" y="24" width="138" height="18"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <color key="textColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </label>
+                                    </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                             </tableViewCell>
@@ -61,24 +77,24 @@
                                     <action selector="pressed:" destination="2" eventType="valueChanged" id="x4w-he-LIE"/>
                                 </connections>
                             </segmentedControl>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" momentary="YES" id="zsD-Cs-aWG">
-                                <rect key="frame" x="158" y="302" width="129" height="44"/>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" segmentControlStyle="plain" momentary="YES" id="zsD-Cs-aWG" userLabel="AccidentalsFGAB">
+                                <rect key="frame" x="158" y="302" width="123" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                 <segments>
-                                    <segment title="F♯"/>
-                                    <segment title="G♯"/>
-                                    <segment title="A♯"/>
+                                    <segment title="♯♭"/>
+                                    <segment title="♯♭"/>
+                                    <segment title="♯♭"/>
                                 </segments>
                                 <connections>
                                     <action selector="pressed:" destination="2" eventType="valueChanged" id="NAB-tP-uHL"/>
                                 </connections>
                             </segmentedControl>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" momentary="YES" id="SVR-Ac-5nJ">
-                                <rect key="frame" x="34" y="302" width="91" height="44"/>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" segmentControlStyle="plain" momentary="YES" id="SVR-Ac-5nJ" userLabel="AccidentalsCDE">
+                                <rect key="frame" x="36" y="302" width="86" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <segments>
-                                    <segment title="C♯"/>
-                                    <segment title="D♯"/>
+                                    <segment title="♯♭"/>
+                                    <segment title="♯♭"/>
                                 </segments>
                                 <connections>
                                     <action selector="pressed:" destination="2" eventType="valueChanged" id="MKk-qE-nVS"/>
@@ -102,6 +118,8 @@
                     </view>
                     <navigationItem key="navigationItem" title="Guess The Note" id="Wlp-tb-gzc"/>
                     <connections>
+                        <outlet property="accidentalsCDE" destination="SVR-Ac-5nJ" id="qpu-2m-3sG"/>
+                        <outlet property="accidentalsFGAB" destination="zsD-Cs-aWG" id="F6R-RC-Jlk"/>
                         <outlet property="scaleView" destination="Qat-yq-2FD" id="hyR-L1-iN1"/>
                         <outlet property="streakLabel" destination="Dc8-Jr-lys" id="mjw-Zd-cz2"/>
                     </connections>
@@ -231,7 +249,9 @@
                             <outlet property="delegate" destination="Utt-X0-4K3" id="dVd-o3-Sor"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="What to do?" id="F2W-gS-UKC"/>
+                    <navigationItem key="navigationItem" title="What to do?" id="F2W-gS-UKC">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="LIG-bA-bfy"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="clefControl" destination="Tmq-vT-cvc" id="RTQ-HA-Je9"/>
                         <outlet property="octaveControl" destination="SLi-wQ-e2Z" id="owB-oM-KmQ"/>
@@ -259,28 +279,6 @@
             <point key="canvasLocation" x="-476" y="5"/>
         </scene>
     </scenes>
-    <classes>
-        <class className="ScaleNoteView" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ScaleNoteView.h"/>
-        </class>
-        <class className="SetupViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SetupViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="clefChanged:" candidateClass="UISegmentedControl"/>
-                <relationship kind="action" name="octaveChanged:" candidateClass="UISegmentedControl"/>
-                <relationship kind="outlet" name="clefControl" candidateClass="UISegmentedControl"/>
-                <relationship kind="outlet" name="octaveControl" candidateClass="UISegmentedControl"/>
-            </relationships>
-        </class>
-        <class className="ViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="pressed:"/>
-                <relationship kind="outlet" name="scaleView" candidateClass="ScaleNoteView"/>
-                <relationship kind="outlet" name="streakLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

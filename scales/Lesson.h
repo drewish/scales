@@ -18,7 +18,7 @@
 @interface Lesson : NSObject
 @property(readonly) Note *currentNote;
 @property NSInteger octave;
-@property NSMutableDictionary *notes;
+@property NSMutableArray *notes;
 @property CGFloat progress;
 @property CGFloat delta;
 @property bool showTreble;

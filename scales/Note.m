@@ -32,7 +32,7 @@
 }
 
 - (id)initWithLetter:(NSString*)l accidental:(NSString*)a inOctave:(NSInteger)o {
-    letter = [l substringToIndex:1];
+    letter = [[l substringToIndex:1] lowercaseString];
     accidental = @"";
     if (a.length > 0) {
         a = [a substringToIndex:1];

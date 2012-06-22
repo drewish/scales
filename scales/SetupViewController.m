@@ -6,6 +6,7 @@
 //  Copyright (c) 2012 drewish.com. All rights reserved.
 //
 
+#import "ScaleViewController.h"
 #import "SetupViewController.h"
 #import "PlayViewController.h"
 #import "Lesson.h"
@@ -17,6 +18,7 @@
 @implementation SetupViewController
 @synthesize octaveControl;
 @synthesize clefControl;
+Lesson *lesson;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -44,6 +46,7 @@
     
     self.isTreble = [prefs boolForKey:@"isTreble"];
     self.octave = [prefs integerForKey:@"octave"];
+    lesson = [Lesson new];
 }
 
 - (void)viewDidUnload
@@ -62,25 +65,29 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([[segue identifier] isEqualToString:@"goPlay"]) {
+    lesson.showTreble = self.isTreble;
+    lesson.octave = self.octave;
+    if ([segue.identifier isEqualToString:@"pickScale"]) {
+        ScaleViewController *vc = segue.destinationViewController;
+        vc.lesson = lesson;
+    }
+    else if ([segue.identifier isEqualToString:@"goPlay"]) {
         NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
         [prefs setBool:self.isTreble forKey:@"isTreble"];
         [prefs setInteger:self.octave forKey:@"octave"];
         [prefs synchronize];
 
-        Lesson *lesson = [Lesson new];
-        lesson.showTreble = self.isTreble;
-        lesson.octave = self.octave;
-        lesson.notes = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+        lesson.notes = [NSMutableArray arrayWithObjects:
                         // C Blues scale.
-                        [Note noteFromLetter:@"c" inOctave:self.octave], @"C",
-                        [Note noteFromLetter:@"e" accidental:@"b" inOctave:self.octave], @"E♭",
-                        [Note noteFromLetter:@"f" inOctave:self.octave], @"F",
-                        [Note noteFromLetter:@"gb" inOctave:self.octave], @"G♭",
-                        [Note noteFromLetter:@"b" accidental:@"♭" inOctave:self.octave], @"B♭",
-                        [Note noteFromLetter:@"C" inOctave:self.octave + 1], @"C",
+                        [Note noteFromLetter:@"c" inOctave:self.octave],
+                        [Note noteFromLetter:@"e" accidental:@"b" inOctave:self.octave],
+                        [Note noteFromLetter:@"f" inOctave:self.octave],
+                        [Note noteFromLetter:@"gb" inOctave:self.octave],
+                        [Note noteFromLetter:@"b" accidental:@"♭" inOctave:self.octave],
+                        [Note noteFromLetter:@"C" inOctave:(self.octave + 1)],
                         nil];
         [lesson pickRandomNote];
+        
         PlayViewController *vc = segue.destinationViewController;
         vc.lesson = lesson;
     }

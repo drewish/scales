@@ -35,15 +35,15 @@
     progress = 0.0;
     delta = 5;
     currentNote = [Note noteFromString:@"c"];
-    notes = [NSMutableDictionary new];
+    notes = [NSMutableArray new];
     return self;
 }
 
 - (void)pickRandomNote
 {
     // Pull out a random key to use as the next note.
-    NSString *key = [[notes allKeys] objectAtIndex:arc4random_uniform(notes.count - 1)];
-    currentNote = [notes objectForKey:key];
+    int random = arc4random_uniform(notes.count);
+    currentNote = [notes objectAtIndex:random];
 }
 
 - (BOOL)matchesGuess:(Note*)guess

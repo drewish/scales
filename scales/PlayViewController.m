@@ -16,6 +16,8 @@
 @implementation PlayViewController
 @synthesize scaleView;
 @synthesize streakLabel;
+@synthesize accidentalsCDE;
+@synthesize accidentalsFGAB;
 @synthesize lesson;
 @synthesize streak;
 NSTimer *timer;
@@ -39,6 +41,8 @@ NSTimer *timer;
 {
     [self setScaleView:nil];
     [self setStreakLabel:nil];
+    [self setAccidentalsCDE:nil];
+    [self setAccidentalsFGAB:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -48,10 +52,24 @@ NSTimer *timer;
     return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
 }
 
-- (IBAction)pressed:(id)sender {
-    UISegmentedControl *s = (UISegmentedControl *)sender;
-    Note *choice = [Note noteFromString:[s titleForSegmentAtIndex:s.selectedSegmentIndex]];
-    [lesson guess:choice];
+- (IBAction)pressed:(UISegmentedControl *)sender {
+    NSString *string;
+    NSInteger index = sender.selectedSegmentIndex;
+    if ([sender isEqual:accidentalsCDE]) {
+        if (index == 0) string = @"C#";
+        else if (index == 1) string = @"D#";
+        else if (index == 2) string = @"E#";
+    }
+    else if ([sender isEqual:accidentalsFGAB]) {
+        if (index == 0) string = @"F#";
+        else if (index == 1) string = @"G#";
+        else if (index == 2) string = @"A#";
+        else if (index == 3) string = @"B#";
+    }
+    else {
+        string = [sender titleForSegmentAtIndex:index];
+    }
+    [lesson guess:[Note noteFromString:string]];
 }
 
 - (void)tick:(NSTimer*)theTimer

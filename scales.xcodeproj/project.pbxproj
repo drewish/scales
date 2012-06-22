@@ -19,6 +19,7 @@
 		5F2F317F158AF47E00689F4D /* ScaleNoteView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F2F317E158AF47D00689F4D /* ScaleNoteView.m */; };
 		5F2F3182158AFAEE00689F4D /* FClef.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F2F3180158AFAEE00689F4D /* FClef.png */; };
 		5F2F3183158AFAEE00689F4D /* GClef.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F2F3181158AFAEE00689F4D /* GClef.png */; };
+		5F71CD7F1594C28A00F871F2 /* ScaleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F71CD7E1594C28A00F871F2 /* ScaleViewController.m */; };
 		5FC0D8CE158E36F0007A8263 /* Lesson.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FC0D8CD158E36F0007A8263 /* Lesson.m */; };
 		5FC0D8D6158EC520007A8263 /* Note.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FC0D8D5158EC520007A8263 /* Note.m */; };
 /* End PBXBuildFile section */
@@ -37,12 +38,14 @@
 		5F2F316D158AEF6700689F4D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		5F2F316E158AEF6700689F4D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		5F2F3171158AEF6700689F4D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
-		5F2F3173158AEF6700689F4D /* PlayViewController.h */ = {isa = PBXFileReference; path = PlayViewController.h; sourceTree = "<group>"; };
+		5F2F3173158AEF6700689F4D /* PlayViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlayViewController.h; sourceTree = "<group>"; };
 		5F2F3174158AEF6700689F4D /* PlayViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlayViewController.m; sourceTree = "<group>"; };
 		5F2F317D158AF47D00689F4D /* ScaleNoteView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScaleNoteView.h; sourceTree = "<group>"; };
 		5F2F317E158AF47D00689F4D /* ScaleNoteView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScaleNoteView.m; sourceTree = "<group>"; };
 		5F2F3180158AFAEE00689F4D /* FClef.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FClef.png; sourceTree = "<group>"; };
 		5F2F3181158AFAEE00689F4D /* GClef.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GClef.png; sourceTree = "<group>"; };
+		5F71CD7D1594C28A00F871F2 /* ScaleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScaleViewController.h; sourceTree = "<group>"; };
+		5F71CD7E1594C28A00F871F2 /* ScaleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScaleViewController.m; sourceTree = "<group>"; };
 		5FC0D8CC158E36F0007A8263 /* Lesson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Lesson.h; sourceTree = "<group>"; };
 		5FC0D8CD158E36F0007A8263 /* Lesson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Lesson.m; sourceTree = "<group>"; };
 		5FC0D8D4158EC520007A8263 /* Note.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Note.h; sourceTree = "<group>"; };
@@ -93,11 +96,11 @@
 		5F2F3164158AEF6600689F4D /* scales */ = {
 			isa = PBXGroup;
 			children = (
-				5F2F3180158AFAEE00689F4D /* FClef.png */,
-				5F2F3181158AFAEE00689F4D /* GClef.png */,
 				5F2F3170158AEF6700689F4D /* MainStoryboard.storyboard */,
 				5F26E0C21592CD93001A3014 /* SetupViewController.h */,
 				5F26E0C31592CD93001A3014 /* SetupViewController.m */,
+				5F71CD7D1594C28A00F871F2 /* ScaleViewController.h */,
+				5F71CD7E1594C28A00F871F2 /* ScaleViewController.m */,
 				5F2F3173158AEF6700689F4D /* PlayViewController.h */,
 				5F2F3174158AEF6700689F4D /* PlayViewController.m */,
 				5F2F317D158AF47D00689F4D /* ScaleNoteView.h */,
@@ -106,6 +109,7 @@
 				5FC0D8D5158EC520007A8263 /* Note.m */,
 				5FC0D8CC158E36F0007A8263 /* Lesson.h */,
 				5FC0D8CD158E36F0007A8263 /* Lesson.m */,
+				5F71CD7B1594C17A00F871F2 /* Assets */,
 				5F2F3165158AEF6600689F4D /* Supporting Files */,
 			);
 			path = scales;
@@ -122,6 +126,15 @@
 				5F2F316C158AEF6700689F4D /* scales-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		5F71CD7B1594C17A00F871F2 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				5F2F3180158AFAEE00689F4D /* FClef.png */,
+				5F2F3181158AFAEE00689F4D /* GClef.png */,
+			);
+			name = Assets;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -195,6 +208,7 @@
 				5FC0D8CE158E36F0007A8263 /* Lesson.m in Sources */,
 				5FC0D8D6158EC520007A8263 /* Note.m in Sources */,
 				5F26E0C41592CD93001A3014 /* SetupViewController.m in Sources */,
+				5F71CD7F1594C28A00F871F2 /* ScaleViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
