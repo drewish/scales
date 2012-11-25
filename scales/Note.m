@@ -13,6 +13,10 @@
 @synthesize accidental;
 @synthesize octave;
 
++ (id)noteFromMidiNumber:(NSInteger)i
+{
+    return [[self alloc] initWithMidiNumber:i];
+}
 + (id)noteFromString:(NSString*)s 
 {
     return [[self alloc] initWithString:s];
@@ -26,12 +30,25 @@
     return [[self alloc] initWithLetter:l accidental:a inOctave:o];
 }
 
+- (id)initWithMidiNumber:(NSInteger)i
+{
+    // There's probably a more elegant way to do this… but this gets it done.
+    NSInteger index = i % 12;
+    NSArray *letters = @[@"c", @"c", @"d", @"d", @"e", @"f", @"f", @"g", @"g", @"a", @"a", @"b"];
+    NSArray *accidentals = @[@"", @"♯", @"", @"♯", @"", @"", @"♯", @"", @"♯", @"", @"♯", @""];
+    letter = [letters objectAtIndex:index];
+    accidental = [accidentals objectAtIndex:index];
+    octave = [NSNumber numberWithInt:(i / 12) - 1];
+    return self;
+}
+
 - (id)initWithLetter:(NSString*)l inOctave:(NSInteger)o 
 {
     return [self initWithLetter:l accidental:@"" inOctave:o];
 }
 
-- (id)initWithLetter:(NSString*)l accidental:(NSString*)a inOctave:(NSInteger)o {
+- (id)initWithLetter:(NSString*)l accidental:(NSString*)a inOctave:(NSInteger)o
+{
     letter = [[l substringToIndex:1] lowercaseString];
     accidental = @"";
     if (a.length > 0) {
@@ -96,6 +113,12 @@
     }
     return NO;
 }
+
+- (NSInteger)midiNote
+{
+    return ([self.octave integerValue] * 12) + self.semitone;
+}
+
 
 - (NSInteger)semitone
 {

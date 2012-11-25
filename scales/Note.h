@@ -9,14 +9,18 @@
 #import <Foundation/Foundation.h>
 
 @interface Note : NSObject
+
++ (id)noteFromMidiNumber:(NSInteger)i;
 + (id)noteFromString:(NSString*)s;
 + (id)noteFromLetter:(NSString*)l inOctave:(NSInteger)o;
 + (id)noteFromLetter:(NSString*)l accidental:(NSString*)a inOctave:(NSInteger)o;
 
+- (id)initWithMidiNumber:(NSInteger)i;
 - (id)initWithString:(NSString*)s;
 - (id)initWithLetter:(NSString*)l inOctave:(NSInteger)o;
 - (id)initWithLetter:(NSString*)l accidental:(NSString*)a inOctave:(NSInteger)o;
 
+@property(readonly) NSInteger midiNumber;
 @property(readonly) NSString *letter;
 @property(readonly) NSString *accidental;
 @property(readonly) NSNumber *octave;
