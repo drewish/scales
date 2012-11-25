@@ -46,14 +46,9 @@
     currentNote = [notes objectAtIndex:random];
 }
 
-- (BOOL)matchesGuess:(Note*)guess
-{
-    return [currentNote isEqual:guess];
-}
-
 - (void)guess:(Note*)guess
 {
-    if ([self matchesGuess:guess]) {
+    if ([currentNote isEqual:guess]) {
         [self guessedRight];
     }
     else {

@@ -7,13 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ScaleNoteView.h"
+#import "Lesson.h"
 
 @interface PlayViewController : UIViewController<LessonDelegate>
-@property (weak, nonatomic) IBOutlet ScaleNoteView *scaleView;
 @property (weak, nonatomic) IBOutlet UILabel *streakLabel;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *accidentalsCDE;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *accidentalsFGAB;
+@property(readonly) CALayer *staffLayer;
+@property(readonly) CALayer *noteLayer;
 @property Lesson *lesson;
 @property NSInteger streak;
 - (IBAction)pressed:(id)sender;

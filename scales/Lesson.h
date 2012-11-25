@@ -26,7 +26,6 @@
 
 //+ (NSInteger)randomSemitone;
 - (void)pickRandomNote;
-- (BOOL)matchesGuess:(Note*)guess;
 - (void)tick;
 - (void)guess:(Note*)guess;
 - (void)guessedRight;
