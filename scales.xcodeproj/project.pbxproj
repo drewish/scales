@@ -17,7 +17,6 @@
 		5F2F3172158AEF6700689F4D /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5F2F3170158AEF6700689F4D /* MainStoryboard.storyboard */; };
 		5F2F3175158AEF6700689F4D /* PlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F2F3174158AEF6700689F4D /* PlayViewController.m */; };
 		5F3BBE2C165238AE00124919 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F3BBE2B165238AE00124919 /* Default-568h@2x.png */; };
-		5F71CD7F1594C28A00F871F2 /* ScaleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F71CD7E1594C28A00F871F2 /* ScaleViewController.m */; };
 		5FC0D8CE158E36F0007A8263 /* Lesson.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FC0D8CD158E36F0007A8263 /* Lesson.m */; };
 		5FC0D8D6158EC520007A8263 /* Note.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FC0D8D5158EC520007A8263 /* Note.m */; };
 		5FEF79621664A9A000C990FF /* FClef.png in Resources */ = {isa = PBXBuildFile; fileRef = 5FEF79541664A9A000C990FF /* FClef.png */; };
@@ -42,8 +41,6 @@
 		5F2F3173158AEF6700689F4D /* PlayViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlayViewController.h; sourceTree = "<group>"; };
 		5F2F3174158AEF6700689F4D /* PlayViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlayViewController.m; sourceTree = "<group>"; };
 		5F3BBE2B165238AE00124919 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		5F71CD7D1594C28A00F871F2 /* ScaleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScaleViewController.h; sourceTree = "<group>"; };
-		5F71CD7E1594C28A00F871F2 /* ScaleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScaleViewController.m; sourceTree = "<group>"; };
 		5FC0D8CC158E36F0007A8263 /* Lesson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Lesson.h; sourceTree = "<group>"; };
 		5FC0D8CD158E36F0007A8263 /* Lesson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Lesson.m; sourceTree = "<group>"; };
 		5FC0D8D4158EC520007A8263 /* Note.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Note.h; sourceTree = "<group>"; };
@@ -71,7 +68,6 @@
 		5F2F314F158AEF6600689F4D = {
 			isa = PBXGroup;
 			children = (
-				5FF087C41661D55A00A3B0EE /* QuartzCore.framework */,
 				5F3BBE2B165238AE00124919 /* Default-568h@2x.png */,
 				5F2F3164158AEF6600689F4D /* scales */,
 				5F2F315D158AEF6600689F4D /* Frameworks */,
@@ -90,6 +86,7 @@
 		5F2F315D158AEF6600689F4D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5FF087C41661D55A00A3B0EE /* QuartzCore.framework */,
 				5F2F315E158AEF6600689F4D /* UIKit.framework */,
 				5F2F3160158AEF6600689F4D /* Foundation.framework */,
 				5F2F3162158AEF6600689F4D /* CoreGraphics.framework */,
@@ -104,8 +101,6 @@
 				5F2F3170158AEF6700689F4D /* MainStoryboard.storyboard */,
 				5F26E0C21592CD93001A3014 /* SetupViewController.h */,
 				5F26E0C31592CD93001A3014 /* SetupViewController.m */,
-				5F71CD7D1594C28A00F871F2 /* ScaleViewController.h */,
-				5F71CD7E1594C28A00F871F2 /* ScaleViewController.m */,
 				5F2F3173158AEF6700689F4D /* PlayViewController.h */,
 				5F2F3174158AEF6700689F4D /* PlayViewController.m */,
 				5FC0D8D4158EC520007A8263 /* Note.h */,
@@ -210,7 +205,6 @@
 				5FC0D8CE158E36F0007A8263 /* Lesson.m in Sources */,
 				5FC0D8D6158EC520007A8263 /* Note.m in Sources */,
 				5F26E0C41592CD93001A3014 /* SetupViewController.m in Sources */,
-				5F71CD7F1594C28A00F871F2 /* ScaleViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

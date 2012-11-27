@@ -6,7 +6,6 @@
 //  Copyright (c) 2012 drewish.com. All rights reserved.
 //
 
-#import "ScaleViewController.h"
 #import "SetupViewController.h"
 #import "PlayViewController.h"
 #import "Lesson.h"
@@ -67,18 +66,13 @@ Lesson *lesson;
 {
     lesson.showTreble = self.isTreble;
     lesson.octave = self.octave;
-    if ([segue.identifier isEqualToString:@"pickScale"]) {
-        ScaleViewController *vc = segue.destinationViewController;
-        vc.lesson = lesson;
-    }
-    else if ([segue.identifier isEqualToString:@"goPlay"]) {
+    if ([segue.identifier isEqualToString:@"goPlay"]) {
         NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
         [prefs setBool:self.isTreble forKey:@"isTreble"];
         [prefs setInteger:self.octave forKey:@"octave"];
         [prefs synchronize];
 
         lesson.notes = [NSMutableArray arrayWithObjects:
-                        // C Blues scale.
                         [Note noteFromLetter:@"c" inOctave:self.octave],
                         [Note noteFromLetter:@"e" accidental:@"b" inOctave:self.octave],
                         [Note noteFromLetter:@"f" inOctave:self.octave],
