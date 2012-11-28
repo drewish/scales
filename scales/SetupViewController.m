@@ -17,7 +17,6 @@
 @implementation SetupViewController
 @synthesize octaveControl;
 @synthesize clefControl;
-Lesson *lesson;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -45,7 +44,6 @@ Lesson *lesson;
     
     self.isTreble = [prefs boolForKey:@"isTreble"];
     self.octave = [prefs integerForKey:@"octave"];
-    lesson = [Lesson new];
 }
 
 - (void)viewDidUnload
@@ -64,24 +62,21 @@ Lesson *lesson;
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    lesson.showTreble = self.isTreble;
-    lesson.octave = self.octave;
     if ([segue.identifier isEqualToString:@"goPlay"]) {
         NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
         [prefs setBool:self.isTreble forKey:@"isTreble"];
         [prefs setInteger:self.octave forKey:@"octave"];
         [prefs synchronize];
 
-        lesson.notes = [NSMutableArray arrayWithObjects:
-                        [Note noteFromLetter:@"c" inOctave:self.octave],
-                        [Note noteFromLetter:@"e" accidental:@"b" inOctave:self.octave],
-                        [Note noteFromLetter:@"f" inOctave:self.octave],
-                        [Note noteFromLetter:@"gb" inOctave:self.octave],
-                        [Note noteFromLetter:@"b" accidental:@"♭" inOctave:self.octave],
-                        [Note noteFromLetter:@"C" inOctave:(self.octave + 1)],
-                        nil];
+        Lesson *lesson = [Lesson new];
+        lesson.showTreble = self.isTreble;
+        lesson.octave = self.octave;
+        lesson.notes = [NSMutableArray arrayWithCapacity:12];
+        for (int i = 0; i < 13; i++) {
+            [lesson.notes addObject:[Note noteFromMidiNumber:i + ((self.octave + 1) * 12)]];
+        }
         [lesson pickRandomNote];
-        
+
         PlayViewController *vc = segue.destinationViewController;
         vc.lesson = lesson;
     }

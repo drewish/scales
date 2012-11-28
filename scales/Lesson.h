@@ -19,14 +19,12 @@
 @property(readonly) Note *currentNote;
 @property NSInteger octave;
 @property NSMutableArray *notes;
-@property CGFloat progress;
-@property CGFloat delta;
 @property bool showTreble;
 @property id<LessonDelegate> delegate;
 
 //+ (NSInteger)randomSemitone;
 - (void)pickRandomNote;
-- (void)tick;
+- (void)pickNextNote;
 - (void)guess:(Note*)guess;
 - (void)guessedRight;
 - (void)guessedWrong;

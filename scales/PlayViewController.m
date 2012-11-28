@@ -31,7 +31,7 @@ NSTimer *timer;
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
 
-    dt = 0.2;
+    dt = 1;
 
     lesson.delegate = self;
 
@@ -47,15 +47,24 @@ NSTimer *timer;
     CGRect frame = CGRectInset(self.view.frame, 20, 20);
 
     staffLayer = [CALayer layer];
-    [staffLayer setFrame:frame];
+    staffLayer.frame = frame;
+    staffLayer.borderColor = [[UIColor orangeColor] CGColor];
+    staffLayer.borderWidth = 1;
+    staffLayer.contentsScale = [[UIScreen mainScreen] scale];
+    staffLayer.delegate = self;
     [self.view.layer addSublayer:staffLayer];
-    [staffLayer setDelegate:self];
     [staffLayer setNeedsDisplay];
 
     noteLayer = [CALayer layer];
-    [noteLayer setFrame:CGRectMake(staffLayer.frame.size.width, staffLayer.frame.origin.y, 50, staffLayer.frame.size.height)];
+    noteLayer.frame = CGRectMake(staffLayer.frame.size.width - staffLayer.frame.origin.x,
+                                 staffLayer.frame.origin.y,
+                                 45,
+                                 staffLayer.frame.size.height);
+    noteLayer.borderColor = [[UIColor greenColor] CGColor];
+    noteLayer.borderWidth = 1;
+    noteLayer.contentsScale = [[UIScreen mainScreen] scale];
+    noteLayer.delegate = self;
     [self.view.layer addSublayer:noteLayer];
-    [noteLayer setDelegate:self];
     [noteLayer setNeedsDisplay];
 }
 
@@ -81,11 +90,11 @@ NSTimer *timer;
     // So we move down to find C in the octave...
     if (lesson.showTreble) {
         // The 6 is there because C6 lines up two ledger lines from the top
-        spot = (6 - n.octave.integerValue) * 3.5 + 1;
+        spot = (6 - n.octave) * 3.5 + 1;
     }
     else {
         // Bass cleff C4 is ??? lines above the first line.
-        spot = (4 - n.octave.integerValue) * 3.5 + 2;
+        spot = (4 - n.octave) * 3.5 + 2;
     }
     // ...then move it upwards for a specific note.
     NSString *letter = [n.letter substringToIndex:1];
@@ -172,15 +181,18 @@ NSTimer *timer;
     UIFont *font = [UIFont fontWithName:@"CourierNewPS-BoldMT" size:36];
     CGSize textSize = [accidental sizeWithFont:font];
     CGPoint textPoint = CGPointMake(x, [self yOfSpot:spot]);
+    // Make some minor adjustments to put the character in the right position.
     if ([accidental isEqualToString:@"♯"]) {
         textPoint.x -= textSize.width + 10;
         textPoint.y -= textSize.height / 2.1;
     }
-    if ([accidental isEqualToString:@"♭"]) {
+    else if ([accidental isEqualToString:@"♭"]) {
         textPoint.x -= textSize.width + 5;
         textPoint.y -= textSize.height / 1.75;
     }
-    // Not going to worry about ♮ yet.
+    else if ([accidental isEqualToString:@"♮"]) {
+        // Not going to worry about ♮ yet.
+    }
     [accidental drawAtPoint:textPoint withFont:font];
 }
 
@@ -212,8 +224,10 @@ NSTimer *timer;
         [self drawStaff];
     }
     else if (layer == noteLayer) {
-        [noteLayer setFrame:CGRectMake(staffLayer.frame.size.width, staffLayer.frame.origin.y, 50, staffLayer.frame.size.height)];
-
+        noteLayer.frame = CGRectMake(staffLayer.frame.size.width - staffLayer.frame.origin.x,
+                                     staffLayer.frame.origin.y,
+                                     45,
+                                     staffLayer.frame.size.height);
         [self drawNote:lesson.currentNote atX:30];
     }
     UIGraphicsPopContext();
@@ -250,15 +264,16 @@ NSTimer *timer;
     else {
         string = [sender titleForSegmentAtIndex:index];
     }
-    [lesson guess:[Note noteFromString:string]];
+    [lesson guess:[Note noteFromString:string inOctave:lesson.octave]];
 }
 
 - (void)tick:(NSTimer*)theTimer
 {
-    [lesson tick];
-    CGFloat w = staffLayer.frame.size.width;
-//    CGFloat x = w - (lesson.progress * (w - 75));
-    noteLayer.frame = CGRectOffset(noteLayer.frame, -10, 0);
+    noteLayer.frame = CGRectOffset(noteLayer.frame, -15, 0);
+    // 40 accounts for the width of the cleff.
+    if (noteLayer.frame.origin.x < staffLayer.frame.origin.x + 41) {
+        [lesson timedOut];
+    }
 }
 
 - (void)timedOut

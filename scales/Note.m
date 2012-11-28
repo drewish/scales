@@ -9,103 +9,89 @@
 #import "Note.h"
 
 @implementation Note
-@synthesize letter;
-@synthesize accidental;
-@synthesize octave;
+//@synthesize letter;
+//@synthesize accidental;
+//@synthesize octave;
+@synthesize direction;
+@synthesize midiNumber;
 
 + (id)noteFromMidiNumber:(NSInteger)i
 {
     return [[self alloc] initWithMidiNumber:i];
 }
-+ (id)noteFromString:(NSString*)s 
+
++ (id)noteFromString:(NSString*)s inOctave:(NSInteger)o
 {
-    return [[self alloc] initWithString:s];
-}
-+ (id)noteFromLetter:(NSString*)l inOctave:(NSInteger)o
-{
-    return [[self alloc] initWithLetter:l inOctave:o];
-}
-+ (id)noteFromLetter:(NSString*)l accidental:(NSString*)a inOctave:(NSInteger)o
-{
-    return [[self alloc] initWithLetter:l accidental:a inOctave:o];
+    return [[self alloc] initWithString:s inOctave:o];
 }
 
 - (id)initWithMidiNumber:(NSInteger)i
 {
-    // There's probably a more elegant way to do this… but this gets it done.
-    NSInteger index = i % 12;
-    NSArray *letters = @[@"c", @"c", @"d", @"d", @"e", @"f", @"f", @"g", @"g", @"a", @"a", @"b"];
-    NSArray *accidentals = @[@"", @"♯", @"", @"♯", @"", @"", @"♯", @"", @"♯", @"", @"♯", @""];
-    letter = [letters objectAtIndex:index];
-    accidental = [accidentals objectAtIndex:index];
-    octave = [NSNumber numberWithInt:(i / 12) - 1];
+    NSAssert(i >= 0 && i < 127, @"MIDI Number is out of range.");
+    midiNumber = i;
+    direction = NoteUp;
     return self;
 }
 
-- (id)initWithLetter:(NSString*)l inOctave:(NSInteger)o 
-{
-    return [self initWithLetter:l accidental:@"" inOctave:o];
-}
-
-- (id)initWithLetter:(NSString*)l accidental:(NSString*)a inOctave:(NSInteger)o
-{
-    letter = [[l substringToIndex:1] lowercaseString];
-    accidental = @"";
-    if (a.length > 0) {
-        a = [a substringToIndex:1];
-        if ([a isEqualToString:@"♯"] || [a isEqualToString:@"#"]) {
-            accidental = @"♯";
-        }
-        else if ([a isEqualToString:@"♭"] || [a isEqualToString:@"b"]) {
-            accidental = @"♭";
-        }
-    }
-    octave = [NSNumber numberWithInteger:o];
-    return self;    
-}
-
 // It might be better to just do this as a regex...
-- (id)initWithString:(NSString*)s
+- (id)initWithString:(NSString*)s inOctave:(NSInteger)o
 {
-    // Let's just deal with lowercase for simplicity.
-    NSString *n = [s lowercaseString];
+    // Put the pipes in to hold the spaces so the index matches the MIDI note
+    // offset.
+    NSString *notes = @"c|d|ef|g|a|b";
     NSCharacterSet *letters = [NSCharacterSet characterSetWithCharactersInString:@"abcdefg"];
     NSCharacterSet *digits = [NSCharacterSet decimalDigitCharacterSet];
+    NSString *letter;
+    // This is bad that we're duplicating the parameter in the string.
+    NSInteger octave = o;
 
-    letter = @"";
-    accidental = @"";
-    octave = nil;
+    midiNumber = 0;
+    direction = NoteDown;
 
-    if (n.length == 1) {
-        letter = n; 
+    // Let's just deal with lowercase for simplicity.
+    s = [s lowercaseString];
+
+    if (s.length == 1) {
+        letter = s;
     }
-    else if (n.length > 1) {
-        letter = [n substringToIndex:1];
-        NSString *suffix = [n substringWithRange:NSMakeRange(1, 1)];
+    else if (s.length > 1) {
+        letter = [s substringToIndex:1];
+        NSString *suffix = [s substringWithRange:NSMakeRange(1, 1)];
+        // If there's an accidental add that to the MIDI number and then factor
+        // that into the default formatting.
         if ([suffix isEqualToString:@"♯"] || [suffix isEqualToString:@"#"]) {
-            accidental = @"♯";
+            midiNumber += 1;
+            direction = NoteUp;
         }
         else if ([suffix isEqualToString:@"♭"] || [suffix isEqualToString:@"b"]) {
-            accidental = @"♭";
+            midiNumber -= 1;
+            direction = NoteDown;
         }
+
         // Check the second character for an octave...
         else if ([digits characterIsMember:[suffix characterAtIndex:0]]) {
-            octave = [NSNumber numberWithInteger:[suffix integerValue]];
+            octave = [suffix integerValue];
         }
         // And if there wasn't any thing there, check the 3rd.
-        if (n.length > 2 && [digits characterIsMember:[n characterAtIndex:2]]) {
-            octave = [NSNumber numberWithInteger:[[n substringWithRange:NSMakeRange(2, 1)] integerValue]];
+        if (s.length > 2 && [digits characterIsMember:[s characterAtIndex:2]]) {
+            octave = [[s substringWithRange:NSMakeRange(2, 1)] integerValue];
         }
     }
-    
-    assert([letters characterIsMember:[n characterAtIndex:0]]);
-    assert(octave == nil || NSLocationInRange([octave integerValue], NSMakeRange(1, 6)));
+
+    // Figure out what the note adds...
+    assert([letters characterIsMember:[s characterAtIndex:0]]);
+    NSRange r = [notes rangeOfString:letter];
+    midiNumber += r.location;
+
+    // ...then put in the octave.
+    assert(NSLocationInRange(octave, NSMakeRange(1, 6)));
+    midiNumber += (octave + 1) * 12;
 
     return self;
 }
 
 // Ignore octaves for equality purposes.
-- (BOOL)isEqual:(id)obj;
+- (BOOL)isEqual:(id)obj
 {
     if ([obj isKindOfClass:[Note class]]) {
         Note *other = (Note *)obj;
@@ -114,38 +100,49 @@
     return NO;
 }
 
-- (NSInteger)midiNote
+- (NSString*)description
 {
-    return ([self.octave integerValue] * 12) + self.semitone;
+    return [NSString stringWithFormat:@"%@%@%i", self.letter, self.accidental, self.octave];
 }
 
+- (NSInteger)midiNote
+{
+    return midiNumber;
+}
+
+- (NSString*) letter
+{
+    // There's probably a more elegant way to do this… but this gets it done.
+    NSString *notes;
+    if (self.direction == NoteUp) {
+        notes = @"ccddeffggaab";
+    }
+    if (self.direction == NoteDown) {
+        notes = @"cddeefggaabb";
+    }
+    NSString *letter = [notes substringWithRange:NSMakeRange(midiNumber % 12, 1)];
+    return letter;
+}
+
+- (NSString*) accidental
+{
+    NSInteger index = midiNumber % 12;
+    if (index == 1 || index == 3 || index == 6 || index == 8 || index == 10) {
+        if (self.direction == NoteUp) {
+            return @"♯";
+        }
+        return @"♭";
+    }
+    return @"";
+}
+
+- (NSInteger)octave
+{
+    return (midiNumber / 12) - 1;
+}
 
 - (NSInteger)semitone
 {
-    NSInteger i = 0;
-
-    if ([accidental isEqualToString:@"♯"]) {
-        i += 1;
-    }
-    if ([accidental isEqualToString:@"♭"]) {
-        i -= 1;
-    }
-    
-    if ([letter isEqualToString:@"c"])
-        return i + 0;
-    if ([letter isEqualToString:@"d"])
-        return i + 2;
-    if ([letter isEqualToString:@"e"])
-        return i + 4;
-    if ([letter isEqualToString:@"f"])
-        return i + 5;
-    if ([letter isEqualToString:@"g"])
-        return i + 7;
-    if ([letter isEqualToString:@"a"])
-        return i + 9;
-    if ([letter isEqualToString:@"b"])
-        return i + 11;
-    else
-        return -1;
+    return midiNumber % 12;
 }
 @end

@@ -14,36 +14,34 @@
 @synthesize notes;
 @synthesize octave;
 @synthesize showTreble;
-@synthesize progress;
-@synthesize delta;
 @synthesize delegate;
-
-//
-//+ (NSInteger)randomSemitone
-//{
-//    return arc4random_uniform(12);
-//}
-//
-//+ (NSString*)randomNote
-//{
-//    return [self noteFromSemitone: [self randomSemitone]];
-//}
 
 - (id)init
 {
     self = [super init];
-    progress = 0.0;
-    delta = 5;
-    currentNote = [Note noteFromString:@"c"];
-    notes = [NSMutableArray new];
+    // Put some default stuff in.
+    currentNote = [Note noteFromString:@"c" inOctave:4];
+    notes = [@[currentNote] mutableCopy];
     return self;
 }
 
 - (void)pickRandomNote
 {
+    Note *next;
     // Pull out a random key to use as the next note.
-    int random = arc4random_uniform(notes.count);
-    currentNote = [notes objectAtIndex:random];
+    do {
+        int random = arc4random_uniform(notes.count);
+        next = [notes objectAtIndex:random];
+    }
+    // Make sure we don't keep picking the same note.
+    while (notes.count > 1 && [next isEqual:currentNote]);
+    currentNote = next;
+}
+
+- (void)pickNextNote
+{
+    int index = ([notes indexOfObject:currentNote] + 1) % (notes.count - 1);
+    currentNote = [notes objectAtIndex:index];
 }
 
 - (void)guess:(Note*)guess
@@ -58,43 +56,21 @@
 
 - (void)guessedRight
 {
-    // Start again with a new piece.
-    progress = 0.0;
-    [self pickRandomNote];
-    // Spead it up a little bit.
-    //delta += 0.5;
+    //    [self pickRandomNote];
+    [self pickNextNote];
     [self.delegate guessedRight];
 }
 
 - (void)guessedWrong
 {
-    progress = -0.1;
-
-    // Make it a little easier.
-    if (delta > 5) {
-        delta = 2;
-    }
-    else if (delta > 2) {
-        delta *= 0.5;
-    }
-    // Make sure we don't stop.
-    if (delta <= 0) {
-        delta = 1;
-    }
+    // Let them try again.
     [self.delegate guessedWrong];
 }
 
 - (void)timedOut
 {
-    progress = -0.1;
+    // Let them try again.
     [self.delegate timedOut];
 }
 
--(void)tick
-{
-    progress += (delta / 100);
-    if (progress >= 1.0) {
-        [self timedOut];
-    }
-}
 @end
