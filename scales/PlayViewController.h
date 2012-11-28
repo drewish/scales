@@ -11,8 +11,6 @@
 
 @interface PlayViewController : UIViewController<LessonDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *streakLabel;
-@property (weak, nonatomic) IBOutlet UISegmentedControl *accidentalsCDE;
-@property (weak, nonatomic) IBOutlet UISegmentedControl *accidentalsFGAB;
 @property(readonly) CALayer *staffLayer;
 @property(readonly) CALayer *noteLayer;
 @property Lesson *lesson;

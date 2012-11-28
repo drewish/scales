@@ -20,8 +20,6 @@
 @synthesize staffLayer;
 @synthesize noteLayer;
 @synthesize streakLabel;
-@synthesize accidentalsCDE;
-@synthesize accidentalsFGAB;
 @synthesize lesson;
 @synthesize streak;
 NSTimer *timer;
@@ -48,8 +46,8 @@ NSTimer *timer;
 
     staffLayer = [CALayer layer];
     staffLayer.frame = frame;
-    staffLayer.borderColor = [[UIColor orangeColor] CGColor];
-    staffLayer.borderWidth = 1;
+//    staffLayer.borderColor = [[UIColor orangeColor] CGColor];
+//    staffLayer.borderWidth = 1;
     staffLayer.contentsScale = [[UIScreen mainScreen] scale];
     staffLayer.delegate = self;
     [self.view.layer addSublayer:staffLayer];
@@ -60,12 +58,21 @@ NSTimer *timer;
                                  staffLayer.frame.origin.y,
                                  45,
                                  staffLayer.frame.size.height);
-    noteLayer.borderColor = [[UIColor greenColor] CGColor];
-    noteLayer.borderWidth = 1;
+//    noteLayer.borderColor = [[UIColor greenColor] CGColor];
+//    noteLayer.borderWidth = 1;
     noteLayer.contentsScale = [[UIScreen mainScreen] scale];
     noteLayer.delegate = self;
     [self.view.layer addSublayer:noteLayer];
     [noteLayer setNeedsDisplay];
+
+
+//    for (int i = 1; i < 13; i ++) {
+//        CALayer *key = [[self.view viewWithTag:i] layer];
+//        key.borderWidth = 1;
+//        if (i == 2 || i == 4 || i == 7 || i == 9 || i == 11) {
+//            key.borderColor = [[UIColor whiteColor] CGColor];
+//        }
+//    }
 }
 
 
@@ -236,8 +243,6 @@ NSTimer *timer;
 - (void)viewDidUnload
 {
     [self setStreakLabel:nil];
-    [self setAccidentalsCDE:nil];
-    [self setAccidentalsFGAB:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -248,23 +253,8 @@ NSTimer *timer;
 }
 
 - (IBAction)pressed:(UISegmentedControl *)sender {
-    NSString *string;
-    NSInteger index = sender.selectedSegmentIndex;
-    if ([sender isEqual:accidentalsCDE]) {
-        if (index == 0) string = @"C#";
-        else if (index == 1) string = @"D#";
-        else if (index == 2) string = @"E#";
-    }
-    else if ([sender isEqual:accidentalsFGAB]) {
-        if (index == 0) string = @"F#";
-        else if (index == 1) string = @"G#";
-        else if (index == 2) string = @"A#";
-        else if (index == 3) string = @"B#";
-    }
-    else {
-        string = [sender titleForSegmentAtIndex:index];
-    }
-    [lesson guess:[Note noteFromString:string inOctave:lesson.octave]];
+    sender.selected = false;
+    [lesson guess:[Note noteFromMidiNumber:(sender.tag - 1)]];
 }
 
 - (void)tick:(NSTimer*)theTimer
@@ -296,7 +286,37 @@ NSTimer *timer;
     streak = 0;
     streakLabel.text = [NSString stringWithFormat:@"%i", streak];
 
+    // This isn't great but I want some minimal feed back for now.
+    UIView *view = [self.view viewWithTag:(lesson.currentNote.semitone + 1)];
+    if ([view isKindOfClass:[UIButton class]]) {
+        [(UIButton*)view setSelected:true];
+    }
+
     [noteLayer setNeedsDisplay];
+/*
+// create the animation that will handle the pulsing.
+CABasicAnimation* pulseAnimation = [CABasicAnimation animation];
+
+// the attribute we want to animate is the inputIntensity
+// of the pulseFilter
+pulseAnimation.keyPath = @"filters.pulseFilter.inputIntensity";
+
+// we want it to animate from the value 0 to 1
+pulseAnimation.fromValue = [NSNumber numberWithFloat: 0.0];
+pulseAnimation.toValue = [NSNumber numberWithFloat: 1.5];
+
+// over a one second duration, and run an infinite
+// number of times
+pulseAnimation.duration = 1.0;
+
+// use a timing curve of easy in, easy out..
+pulseAnimation.timingFunction = [CAMediaTimingFunction functionWithName: kCAMediaTimingFunctionEaseInEaseOut];
+
+// add the animation to the selection layer. This causes
+// it to begin animating. We'll use pulseAnimation as the
+// animation key name
+[selectionLayer addAnimation:pulseAnimation forKey:@"pulseAnimation"];
+*/
 }
 
 @end

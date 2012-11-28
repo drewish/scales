@@ -35,13 +35,19 @@
     }
     // Make sure we don't keep picking the same note.
     while (notes.count > 1 && [next isEqual:currentNote]);
+    // TODO should probably look at setting the note direction based on the
+    // previous note, flip it for now.
+    next.direction = (next.direction == NoteDown) ? NoteUp : NoteDown;
     currentNote = next;
 }
 
 - (void)pickNextNote
 {
     int index = ([notes indexOfObject:currentNote] + 1) % (notes.count - 1);
-    currentNote = [notes objectAtIndex:index];
+    Note *next = [notes objectAtIndex:index];
+    // TODO should probably look at setting the note direction based on the
+    // previous note
+    currentNote = next;
 }
 
 - (void)guess:(Note*)guess
@@ -56,8 +62,8 @@
 
 - (void)guessedRight
 {
-    //    [self pickRandomNote];
-    [self pickNextNote];
+    [self pickRandomNote];
+//    [self pickNextNote];
     [self.delegate guessedRight];
 }
 

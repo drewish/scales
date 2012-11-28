@@ -5,7 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1930"/>
     </dependencies>
     <scenes>
-        <!--Play View Controller - Guess The Note-->
+        <!--Play View Controller - Pick The Note-->
         <scene sceneID="5">
             <objects>
                 <viewController id="2" customClass="PlayViewController" sceneMemberID="viewController">
@@ -13,60 +13,187 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" momentary="YES" id="mOd-Gp-47I" userLabel="Naturals">
-                                <rect key="frame" x="20" y="353" width="280" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                <segments>
-                                    <segment title="C"/>
-                                    <segment title="D"/>
-                                    <segment title="E"/>
-                                    <segment title="F"/>
-                                    <segment title="G"/>
-                                    <segment title="A"/>
-                                    <segment title="B"/>
-                                </segments>
-                                <connections>
-                                    <action selector="pressed:" destination="2" eventType="valueChanged" id="x4w-he-LIE"/>
-                                </connections>
-                            </segmentedControl>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" segmentControlStyle="plain" momentary="YES" id="zsD-Cs-aWG" userLabel="AccidentalsFGAB">
-                                <rect key="frame" x="158" y="302" width="123" height="44"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
-                                <segments>
-                                    <segment title="♯♭"/>
-                                    <segment title="♯♭"/>
-                                    <segment title="♯♭"/>
-                                </segments>
-                                <connections>
-                                    <action selector="pressed:" destination="2" eventType="valueChanged" id="NAB-tP-uHL"/>
-                                </connections>
-                            </segmentedControl>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" segmentControlStyle="plain" momentary="YES" id="SVR-Ac-5nJ" userLabel="AccidentalsCDE">
-                                <rect key="frame" x="36" y="302" width="86" height="44"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <segments>
-                                    <segment title="♯♭"/>
-                                    <segment title="♯♭"/>
-                                </segments>
-                                <connections>
-                                    <action selector="pressed:" destination="2" eventType="valueChanged" id="MKk-qE-nVS"/>
-                                </connections>
-                            </segmentedControl>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="Dc8-Jr-lys">
-                                <rect key="frame" x="200" y="266" width="100" height="24"/>
+                                <rect key="frame" x="207" y="179" width="93" height="24"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" id="mpC-aa-kVO">
+                                <rect key="frame" x="23" y="277" width="40" height="120"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="C" backgroundImage="KeyWhite-Default.png">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="selected" backgroundImage="KeyWhite-Selected.png"/>
+                                <state key="highlighted" backgroundImage="KeyWhite-Highlighted.png"/>
+                                <connections>
+                                    <action selector="pressed:" destination="2" eventType="touchUpInside" id="lzf-UO-cui"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" id="FCG-ed-J9c">
+                                <rect key="frame" x="62" y="277" width="40" height="120"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="D" backgroundImage="KeyWhite-Default.png">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="selected" backgroundImage="KeyWhite-Selected.png"/>
+                                <state key="highlighted" backgroundImage="KeyWhite-Highlighted.png"/>
+                                <connections>
+                                    <action selector="pressed:" destination="2" eventType="touchUpInside" id="2CI-Nl-DNj"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" id="7b9-2O-PJg">
+                                <rect key="frame" x="101" y="277" width="40" height="120"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="E" backgroundImage="KeyWhite-Default.png">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="selected" backgroundImage="KeyWhite-Selected.png"/>
+                                <state key="highlighted" backgroundImage="KeyWhite-Highlighted.png"/>
+                                <connections>
+                                    <action selector="pressed:" destination="2" eventType="touchUpInside" id="7gx-mU-87z"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" id="V16-AV-ZQ3">
+                                <rect key="frame" x="140" y="277" width="40" height="120"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="F" backgroundImage="KeyWhite-Default.png">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="selected" backgroundImage="KeyWhite-Selected.png"/>
+                                <state key="highlighted" backgroundImage="KeyWhite-Highlighted.png"/>
+                                <connections>
+                                    <action selector="pressed:" destination="2" eventType="touchUpInside" id="h1L-ai-Cwg"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="8" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" id="fwx-tZ-htG">
+                                <rect key="frame" x="179" y="277" width="40" height="120"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="G" backgroundImage="KeyWhite-Default.png">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="selected" backgroundImage="KeyWhite-Selected.png"/>
+                                <state key="highlighted" backgroundImage="KeyWhite-Highlighted.png"/>
+                                <connections>
+                                    <action selector="pressed:" destination="2" eventType="touchUpInside" id="Yji-ej-Pn0"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="10" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" id="2LK-dt-oi0">
+                                <rect key="frame" x="218" y="277" width="40" height="120"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="A" backgroundImage="KeyWhite-Default.png">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="selected" backgroundImage="KeyWhite-Selected.png"/>
+                                <state key="highlighted" backgroundImage="KeyWhite-Highlighted.png"/>
+                                <connections>
+                                    <action selector="pressed:" destination="2" eventType="touchUpInside" id="FOn-Mk-PqX"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="12" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" id="ZDo-jj-juQ">
+                                <rect key="frame" x="257" y="277" width="40" height="120"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="B" backgroundImage="KeyWhite-Default.png">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="selected" backgroundImage="KeyWhite-Selected.png"/>
+                                <state key="highlighted" backgroundImage="KeyWhite-Highlighted.png"/>
+                                <connections>
+                                    <action selector="pressed:" destination="2" eventType="touchUpInside" id="CXG-HC-sW1"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Nwp-nz-u7V">
+                                <rect key="frame" x="42" y="277" width="40" height="70"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal" backgroundImage="KeyBlack-Default.png">
+                                    <color key="titleColor" red="0.19607843137254902" green="0.30980392156862746" blue="0.52156862745098043" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="selected" backgroundImage="KeyBlack-Selected.png"/>
+                                <state key="highlighted" backgroundImage="KeyBlack-Highlighted.png"/>
+                                <connections>
+                                    <action selector="pressed:" destination="2" eventType="touchUpInside" id="sEe-tU-MOr"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="cpl-4j-JpR">
+                                <rect key="frame" x="81" y="277" width="40" height="70"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal" backgroundImage="KeyBlack-Default.png">
+                                    <color key="titleColor" red="0.1960784314" green="0.30980392159999998" blue="0.52156862749999999" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="selected" backgroundImage="KeyBlack-Selected.png"/>
+                                <state key="highlighted" backgroundImage="KeyBlack-Highlighted.png"/>
+                                <connections>
+                                    <action selector="pressed:" destination="2" eventType="touchUpInside" id="aAD-Qp-IiR"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="pgA-tL-ufN">
+                                <rect key="frame" x="159" y="277" width="40" height="70"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal" backgroundImage="KeyBlack-Default.png">
+                                    <color key="titleColor" red="0.1960784314" green="0.30980392159999998" blue="0.52156862749999999" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="selected" backgroundImage="KeyBlack-Selected.png"/>
+                                <state key="highlighted" backgroundImage="KeyBlack-Highlighted.png"/>
+                                <connections>
+                                    <action selector="pressed:" destination="2" eventType="touchUpInside" id="ksY-q5-eqk"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="9" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="bCw-z9-fDK">
+                                <rect key="frame" x="198" y="277" width="40" height="70"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal" backgroundImage="KeyBlack-Default.png">
+                                    <color key="titleColor" red="0.1960784314" green="0.30980392159999998" blue="0.52156862749999999" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="selected" backgroundImage="KeyBlack-Selected.png"/>
+                                <state key="highlighted" backgroundImage="KeyBlack-Highlighted.png"/>
+                                <connections>
+                                    <action selector="pressed:" destination="2" eventType="touchUpInside" id="FbS-Xz-gxJ"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="11" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="IK1-lD-wQX">
+                                <rect key="frame" x="237" y="277" width="40" height="70"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal" backgroundImage="KeyBlack-Default.png">
+                                    <color key="titleColor" red="0.1960784314" green="0.30980392159999998" blue="0.52156862749999999" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="selected" backgroundImage="KeyBlack-Selected.png"/>
+                                <state key="highlighted" backgroundImage="KeyBlack-Highlighted.png"/>
+                                <connections>
+                                    <action selector="pressed:" destination="2" eventType="touchUpInside" id="dz0-Bk-YXv"/>
+                                </connections>
+                            </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                     </view>
-                    <navigationItem key="navigationItem" title="Guess The Note" id="Wlp-tb-gzc"/>
+                    <navigationItem key="navigationItem" title="Pick The Note" id="Wlp-tb-gzc"/>
                     <connections>
-                        <outlet property="accidentalsCDE" destination="SVR-Ac-5nJ" id="qpu-2m-3sG"/>
-                        <outlet property="accidentalsFGAB" destination="zsD-Cs-aWG" id="F6R-RC-Jlk"/>
                         <outlet property="streakLabel" destination="Dc8-Jr-lys" id="mjw-Zd-cz2"/>
                     </connections>
                 </viewController>
@@ -201,6 +328,32 @@
             <point key="canvasLocation" x="-476" y="5"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="KeyBlack-Default.png" width="40" height="70"/>
+        <image name="KeyBlack-Highlighted.png" width="40" height="70"/>
+        <image name="KeyBlack-Selected.png" width="40" height="70"/>
+        <image name="KeyWhite-Default.png" width="40" height="140"/>
+        <image name="KeyWhite-Highlighted.png" width="40" height="140"/>
+        <image name="KeyWhite-Selected.png" width="40" height="140"/>
+    </resources>
+    <classes>
+        <class className="PlayViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PlayViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="pressed:"/>
+                <relationship kind="outlet" name="streakLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="SetupViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SetupViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="clefChanged:" candidateClass="UISegmentedControl"/>
+                <relationship kind="action" name="octaveChanged:" candidateClass="UISegmentedControl"/>
+                <relationship kind="outlet" name="clefControl" candidateClass="UISegmentedControl"/>
+                <relationship kind="outlet" name="octaveControl" candidateClass="UISegmentedControl"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

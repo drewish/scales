@@ -1,6 +1,6 @@
-App Flow:
-	- Table view for picking scales
-	- Draw the scale they'll be practicing with as they configure it.
+
+Unsorted:
+- Custom keyboard, should allow better highlighting and use of space.
 Visuals:
 	- Display a +1 next to the note when they get a point.
 	- Use SVG to draw clef and accidentals.
@@ -15,9 +15,3 @@ Lesson:
 	- Other game modes: transpose, match key, etc
 Audio:
 	- Play a tone for each note
-Archive:
-	- Add settings form @done @project(App Flow)
-	- Show correct clef based on the ScaleNoteView's showTreble property @done @project(Visuals)
-	- Limit notes to scale @done @project(Game Play)
-	- Let the ScaleNoteView manage a moving note. Give it a 0.0-1.0 range and have it move the note. @done @project(Scales App)
-	- Correctly place notes on bass clef @done @project(Scales App)
