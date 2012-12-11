@@ -27,6 +27,7 @@
 
 - (id)initWithMidiNumber:(NSInteger)i
 {
+    self = [super init];
     NSAssert(i >= 0 && i < 127, @"MIDI Number is out of range.");
     midiNumber = i;
     direction = NoteUp;
@@ -36,6 +37,8 @@
 // It might be better to just do this as a regex...
 - (id)initWithString:(NSString*)s inOctave:(NSInteger)o
 {
+    self = [super init];
+
     // Put the pipes in to hold the spaces so the index matches the MIDI note
     // offset.
     NSString *notes = @"c|d|ef|g|a|b";

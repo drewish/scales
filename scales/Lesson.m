@@ -12,6 +12,7 @@
 @implementation Lesson
 @synthesize currentNote;
 @synthesize notes;
+@synthesize activeNotes;
 @synthesize octave;
 @synthesize showTreble;
 @synthesize delegate;
@@ -39,6 +40,8 @@
     // previous note, flip it for now.
     next.direction = (next.direction == NoteDown) ? NoteUp : NoteDown;
     currentNote = next;
+
+    [delegate noteChanged];
 }
 
 - (void)pickNextNote
@@ -48,6 +51,8 @@
     // TODO should probably look at setting the note direction based on the
     // previous note
     currentNote = next;
+
+    [delegate noteChanged];
 }
 
 - (void)guess:(Note*)guess

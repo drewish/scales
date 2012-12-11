@@ -8,6 +8,7 @@
 
 #import "PlayViewController.h"
 #import <QuartzCore/QuartzCore.h>
+#import "NotePlayer.h"
 #import "Lesson.h"
 
 @interface PlayViewController ()
@@ -17,12 +18,45 @@
 @implementation PlayViewController {
     NSTimeInterval dt;
 }
+
+@synthesize player;
 @synthesize staffLayer;
 @synthesize noteLayer;
 @synthesize streakLabel;
 @synthesize lesson;
 @synthesize streak;
 NSTimer *timer;
+
+
+// The audio processing graph should not run when the screen is locked or when the app has
+//  transitioned to the background, because there can be no user interaction in those states.
+//  (Leaving the graph running with the screen locked wastes a significant amount of energy.)
+//
+// Responding to these UIApplication notifications allows this class to stop and restart the
+//    graph as appropriate.
+- (void) registerForUIApplicationNotifications {
+
+    NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
+
+    [notificationCenter addObserver: self
+                           selector: @selector (handleResigningActive:)
+                               name: UIApplicationWillResignActiveNotification
+                             object: [UIApplication sharedApplication]];
+
+    [notificationCenter addObserver: self
+                           selector: @selector (handleBecomingActive:)
+                               name: UIApplicationDidBecomeActiveNotification
+                             object: [UIApplication sharedApplication]];
+}
+
+
+- (void) handleResigningActive: (id) notification {
+    [player stopAudioProcessingGraph];
+}
+
+- (void) handleBecomingActive: (id) notification {
+    [player restartAudioProcessingGraph];
+}
 
 - (void)viewDidLoad
 {
@@ -32,7 +66,7 @@ NSTimer *timer;
     dt = 1;
 
     lesson.delegate = self;
-
+    player = [NotePlayer new];
     timer = [NSTimer scheduledTimerWithTimeInterval:dt
                                      target:self
                                    selector:@selector(tick:)
@@ -252,6 +286,25 @@ NSTimer *timer;
     return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
 }
 
+- (void)noteStart:(Note*)note {
+    [player startNote:note.midiNumber];
+}
+
+- (void)noteStop:(Note*)note {
+    [player stopNote:note.midiNumber];
+}
+
+- (IBAction)pressNote:(id)sender {
+    Note *n = [Note noteFromMidiNumber:([sender tag] - 1) + (lesson.octave + 1) * 12];
+    [self noteStart:n];
+    //    [self performSelector:@selector(noteStop:) withObject:n afterDelay:0.2];
+}
+
+- (IBAction)releaseNote:(id)sender {
+    Note *n = [Note noteFromMidiNumber:([sender tag] - 1) + (lesson.octave + 1) * 12];
+    [self noteStop:n];
+}
+
 - (IBAction)pressed:(UISegmentedControl *)sender {
     sender.selected = false;
     [lesson guess:[Note noteFromMidiNumber:(sender.tag - 1)]];
@@ -266,6 +319,15 @@ NSTimer *timer;
     }
 }
 
+- (void)noteChanged
+{
+    [noteLayer setNeedsDisplay];
+
+    Note *n = lesson.currentNote;
+    [self noteStart:n];
+    [self performSelector:@selector(noteStop:) withObject:n afterDelay:0.2];
+}
+
 - (void)timedOut
 {
     [self guessedWrong];
@@ -276,8 +338,6 @@ NSTimer *timer;
     // Keep score
     streak += 1;
     streakLabel.text = [NSString stringWithFormat:@"%i", streak];
-
-    [noteLayer setNeedsDisplay];
 }
 
 - (void)guessedWrong
@@ -291,8 +351,6 @@ NSTimer *timer;
     if ([view isKindOfClass:[UIButton class]]) {
         [(UIButton*)view setSelected:true];
     }
-
-    [noteLayer setNeedsDisplay];
 /*
 // create the animation that will handle the pulsing.
 CABasicAnimation* pulseAnimation = [CABasicAnimation animation];

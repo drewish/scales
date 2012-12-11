@@ -10,6 +10,7 @@
 #import "Note.h"
 
 @protocol LessonDelegate
+- (void)noteChanged;
 - (void)guessedRight;
 - (void)guessedWrong;
 - (void)timedOut;
@@ -18,6 +19,7 @@
 @interface Lesson : NSObject
 @property(readonly) Note *currentNote;
 @property NSInteger octave;
+@property NSMutableArray *activeNotes;
 @property NSMutableArray *notes;
 @property bool showTreble;
 @property id<LessonDelegate> delegate;
