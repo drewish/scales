@@ -72,10 +72,22 @@
         lesson.showTreble = self.isTreble;
         lesson.octave = self.octave;
         lesson.notes = [NSMutableArray arrayWithCapacity:12];
-        for (int i = 0; i < 13; i++) {
-            [lesson.notes addObject:[Note noteFromMidiNumber:i + ((self.octave + 1) * 12)]];
+
+        // C major scale
+        int majorScale[8] = { 0, 2, 4, 5, 7, 9, 11, 12};
+        for (int i = 0; i < 8; i++) {
+            [lesson.notes addObject:[Note noteFromMidiNumber:majorScale[i] + ((self.octave + 1) * 12)]];
         }
-        [lesson pickRandomNote];
+
+        // Chromatic scale
+//        for (int i = 0; i < 13; i++) {
+//            [lesson.notes addObject:[Note noteFromMidiNumber:i + ((self.octave + 1) * 12)]];
+//        }
+
+        // Just C in the current octave.
+//        [lesson.notes addObject:[Note noteFromMidiNumber:0 + ((self.octave + 1) * 12)]];
+
+        [lesson pickNote];
 
         PlayViewController *vc = segue.destinationViewController;
         vc.lesson = lesson;

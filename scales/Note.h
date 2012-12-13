@@ -22,6 +22,8 @@ typedef enum  {
 - (id)initWithMidiNumber:(NSInteger)i;
 - (id)initWithString:(NSString*)s inOctave:(NSInteger)o;
 
+- (BOOL)isEqualToNote:(id)obj;
+
 @property(readonly) NSInteger midiNumber;
 @property(readonly) NSInteger octave;
 @property(readonly) NSInteger semitone;

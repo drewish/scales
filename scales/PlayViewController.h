@@ -10,11 +10,13 @@
 #import "Lesson.h"
 
 @class NotePlayer;
+@class StaffLayer;
+@class NoteLayer;
 
 @interface PlayViewController : UIViewController<LessonDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *streakLabel;
-@property(readonly) CALayer *staffLayer;
-@property(readonly) CALayer *noteLayer;
+@property(readonly) StaffLayer *staffLayer;
+@property(readonly) NoteLayer *noteLayer;
 @property NotePlayer *player;
 @property Lesson *lesson;
 @property NSInteger streak;

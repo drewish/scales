@@ -94,7 +94,7 @@
 }
 
 // Ignore octaves for equality purposes.
-- (BOOL)isEqual:(id)obj
+- (BOOL)isEqualToNote:(id)obj
 {
     if ([obj isKindOfClass:[Note class]]) {
         Note *other = (Note *)obj;

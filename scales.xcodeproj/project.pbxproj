@@ -39,7 +39,10 @@
 		5FC92E6A1667D6B2004D0579 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FC92E681667D6B2004D0579 /* AudioToolbox.framework */; };
 		5FC92E6B1667D6B2004D0579 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FC92E691667D6B2004D0579 /* CoreAudio.framework */; };
 		5FC92E6D1667D6E3004D0579 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FC92E6C1667D6E3004D0579 /* AVFoundation.framework */; };
+		5FDD65DE1679A1DA000640C1 /* BaseLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FDD65DD1679A1DA000640C1 /* BaseLayer.m */; };
 		5FF087C51661D55A00A3B0EE /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FF087C41661D55A00A3B0EE /* QuartzCore.framework */; };
+		5FF17F9F1677124000E35409 /* StaffLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FF17F9E1677124000E35409 /* StaffLayer.m */; };
+		5FF17FA21677240800E35409 /* NoteLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FF17FA11677240800E35409 /* NoteLayer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,7 +61,7 @@
 		5F2F3171158AEF6700689F4D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		5F2F3173158AEF6700689F4D /* PlayViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlayViewController.h; sourceTree = "<group>"; };
 		5F2F3174158AEF6700689F4D /* PlayViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlayViewController.m; sourceTree = "<group>"; };
-		5F3BBE2B165238AE00124919 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		5F3BBE2B165238AE00124919 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../../Default-568h@2x.png"; sourceTree = "<group>"; };
 		5FBC6BCD1666830600EF1023 /* FClef.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FClef.png; sourceTree = "<group>"; };
 		5FBC6BCE1666830600EF1023 /* FClef.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = FClef.svg; sourceTree = "<group>"; };
 		5FBC6BCF1666830600EF1023 /* GClef.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GClef.png; sourceTree = "<group>"; };
@@ -84,7 +87,13 @@
 		5FC92E681667D6B2004D0579 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		5FC92E691667D6B2004D0579 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 		5FC92E6C1667D6E3004D0579 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		5FDD65DC1679A1DA000640C1 /* BaseLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseLayer.h; sourceTree = "<group>"; };
+		5FDD65DD1679A1DA000640C1 /* BaseLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseLayer.m; sourceTree = "<group>"; };
 		5FF087C41661D55A00A3B0EE /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		5FF17F9D1677124000E35409 /* StaffLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StaffLayer.h; sourceTree = "<group>"; };
+		5FF17F9E1677124000E35409 /* StaffLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StaffLayer.m; sourceTree = "<group>"; };
+		5FF17FA01677240800E35409 /* NoteLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoteLayer.h; sourceTree = "<group>"; };
+		5FF17FA11677240800E35409 /* NoteLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoteLayer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,7 +117,6 @@
 		5F2F314F158AEF6600689F4D = {
 			isa = PBXGroup;
 			children = (
-				5F3BBE2B165238AE00124919 /* Default-568h@2x.png */,
 				5F2F3164158AEF6600689F4D /* scales */,
 				5F2F315D158AEF6600689F4D /* Frameworks */,
 				5F2F315B158AEF6600689F4D /* Products */,
@@ -153,6 +161,12 @@
 				5FC0D8CC158E36F0007A8263 /* Lesson.h */,
 				5FC0D8CD158E36F0007A8263 /* Lesson.m */,
 				5F2F3165158AEF6600689F4D /* Supporting Files */,
+				5FDD65DC1679A1DA000640C1 /* BaseLayer.h */,
+				5FDD65DD1679A1DA000640C1 /* BaseLayer.m */,
+				5FF17F9D1677124000E35409 /* StaffLayer.h */,
+				5FF17F9E1677124000E35409 /* StaffLayer.m */,
+				5FF17FA01677240800E35409 /* NoteLayer.h */,
+				5FF17FA11677240800E35409 /* NoteLayer.m */,
 			);
 			path = scales;
 			sourceTree = "<group>";
@@ -173,6 +187,7 @@
 		5FBC6BCC1666830600EF1023 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				5F3BBE2B165238AE00124919 /* Default-568h@2x.png */,
 				5FC92E4916668517004D0579 /* KeyBlack-Default.png */,
 				5FC92E4A16668517004D0579 /* KeyBlack-Default@2x.png */,
 				5FC92E4B16668517004D0579 /* KeyBlack-Selected.png */,
@@ -279,6 +294,9 @@
 				5FC0D8D6158EC520007A8263 /* Note.m in Sources */,
 				5F26E0C41592CD93001A3014 /* SetupViewController.m in Sources */,
 				5FC92E671667D516004D0579 /* NotePlayer.m in Sources */,
+				5FF17F9F1677124000E35409 /* StaffLayer.m in Sources */,
+				5FF17FA21677240800E35409 /* NoteLayer.m in Sources */,
+				5FDD65DE1679A1DA000640C1 /* BaseLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

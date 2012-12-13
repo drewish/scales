@@ -25,8 +25,7 @@
 @property id<LessonDelegate> delegate;
 
 //+ (NSInteger)randomSemitone;
-- (void)pickRandomNote;
-- (void)pickNextNote;
+- (void)pickNote;
 - (void)guess:(Note*)guess;
 - (void)guessedRight;
 - (void)guessedWrong;
