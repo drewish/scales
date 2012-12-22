@@ -145,7 +145,7 @@ NSTimer *timer;
 
 - (IBAction)pressed:(UISegmentedControl *)sender {
     sender.selected = false;
-    [lesson guess:[Note noteFromMidiNumber:(sender.tag - 1)]];
+    [lesson grade:[Note noteFromMidiNumber:(sender.tag - 1)]];
 }
 
 - (void)tick:(NSTimer*)theTimer
@@ -172,6 +172,7 @@ NSTimer *timer;
 {
     noteLayer.hidden = true;
     [self guessedWrong];
+    [self noteChanged];
 }
 
 - (void)guessedRight

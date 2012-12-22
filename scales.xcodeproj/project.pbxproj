@@ -160,13 +160,8 @@
 				5FC0D8D5158EC520007A8263 /* Note.m */,
 				5FC0D8CC158E36F0007A8263 /* Lesson.h */,
 				5FC0D8CD158E36F0007A8263 /* Lesson.m */,
+				5F963C921683A07B00B30BC2 /* Scale Layers */,
 				5F2F3165158AEF6600689F4D /* Supporting Files */,
-				5FDD65DC1679A1DA000640C1 /* BaseLayer.h */,
-				5FDD65DD1679A1DA000640C1 /* BaseLayer.m */,
-				5FF17F9D1677124000E35409 /* StaffLayer.h */,
-				5FF17F9E1677124000E35409 /* StaffLayer.m */,
-				5FF17FA01677240800E35409 /* NoteLayer.h */,
-				5FF17FA11677240800E35409 /* NoteLayer.m */,
 			);
 			path = scales;
 			sourceTree = "<group>";
@@ -182,6 +177,19 @@
 				5F2F316C158AEF6700689F4D /* scales-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		5F963C921683A07B00B30BC2 /* Scale Layers */ = {
+			isa = PBXGroup;
+			children = (
+				5FDD65DC1679A1DA000640C1 /* BaseLayer.h */,
+				5FDD65DD1679A1DA000640C1 /* BaseLayer.m */,
+				5FF17F9D1677124000E35409 /* StaffLayer.h */,
+				5FF17F9E1677124000E35409 /* StaffLayer.m */,
+				5FF17FA01677240800E35409 /* NoteLayer.h */,
+				5FF17FA11677240800E35409 /* NoteLayer.m */,
+			);
+			name = "Scale Layers";
 			sourceTree = "<group>";
 		};
 		5FBC6BCC1666830600EF1023 /* Resources */ = {

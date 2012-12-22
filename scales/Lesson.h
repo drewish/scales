@@ -19,16 +19,13 @@
 @interface Lesson : NSObject
 @property(readonly) Note *currentNote;
 @property NSInteger octave;
-@property NSMutableArray *activeNotes;
-@property NSMutableArray *notes;
+@property NSArray *notes;
 @property bool showTreble;
 @property id<LessonDelegate> delegate;
 
 //+ (NSInteger)randomSemitone;
 - (void)pickNote;
-- (void)guess:(Note*)guess;
-- (void)guessedRight;
-- (void)guessedWrong;
+- (void)grade:(Note*)guess;
 - (void)timedOut;
 
 @end

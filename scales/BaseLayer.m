@@ -105,10 +105,12 @@
     if (spot == 8) {
         begin = end = 8;
     }
+    // Going up
     else if (spot < top) {
         begin = spot;
         end = top - 1;
     }
+    // Going down
     else if (spot > bottom) {
         begin = bottom + 1;
         end = spot;
