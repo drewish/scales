@@ -69,12 +69,6 @@ NSTimer *timer;
     dt = 1;
 
     lesson.delegate = self;
-    player = [NotePlayer new];
-    timer = [NSTimer scheduledTimerWithTimeInterval:dt
-                                     target:self
-                                   selector:@selector(tick:)
-                                   userInfo:nil
-                                    repeats:YES];
 }
 
 - (void) viewDidAppear:(BOOL)animated
@@ -109,11 +103,26 @@ NSTimer *timer;
 //            key.borderColor = [[UIColor whiteColor] CGColor];
 //        }
 //    }
+
+    player = [NotePlayer new];
+    timer = [NSTimer scheduledTimerWithTimeInterval:dt
+                                             target:self
+                                           selector:@selector(tick:)
+                                           userInfo:nil
+                                            repeats:YES];
 }
 
+- (void) viewDidDisappear:(BOOL)animated
+{
+    [timer invalidate];
+    [player stopAudioProcessingGraph];
+    player = nil;
+}
 
 - (void)viewDidUnload
 {
+    player = nil;
+
     [self setStreakLabel:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
