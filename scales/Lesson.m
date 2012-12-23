@@ -30,12 +30,39 @@ const NSInteger BAD = 6;
     return self;
 }
 
+- (NSString *)description
+{
+    NSMutableString *s = [NSMutableString stringWithFormat:@"\nOverall:|%@|\n", [@"" stringByPaddingToLength:overallErrorRate withString: @"-+" startingAtIndex:0]];
+    NSInteger i = 0;
+    for (NSDictionary *item in notes) {
+        if (i <= maxIndex) {
+            NSString *bar = [@"" stringByPaddingToLength:[[item objectForKey:@"errorRate"] integerValue] withString: @"-+" startingAtIndex:0];
+            if (i == currentIndex) {
+                [s appendFormat:@">%@<", [item objectForKey:@"note"]];
+            }
+            else {
+                [s appendFormat:@" %@ ", [item objectForKey:@"note"]];
+            }
+            [s appendFormat:@"\t|%@|\n", bar];
+
+        }
+        else {
+            [s appendFormat:@" %@\n", [item objectForKey:@"note"]];
+        }
+
+        i++;
+    }
+    return s;
+}
+
+
 - (NSArray*) notes {
     return notes;
 }
 
 - (void)setNotes: (NSArray*) newNotes
 {
+    NSAssert([newNotes count] > 0, @"New notes don't have enough items.");
     notes = [NSMutableArray array];
     for (Note *n in newNotes) {
         [notes addObject:[@{@"note": n, @"errorRate": @(BAD)} mutableCopy]];
@@ -49,7 +76,17 @@ const NSInteger BAD = 6;
 {
     NSDictionary *current = [notes objectAtIndex:currentIndex];
     value = [[current objectForKey:@"errorRate"] integerValue] + value;
+    // Make sure we're in a realistic range.
+    value = MAX(1, MIN(BAD, value));
     [[notes objectAtIndex:currentIndex] setValue:@(value) forKey:@"errorRate"];
+
+    NSInteger i = 0;
+    NSInteger sum = 0;
+    // Figure out the total of the error rates of the active notes...
+    for (i = 0; i <= maxIndex; i++) {
+        sum += [[[notes objectAtIndex:i] objectForKey:@"errorRate"] integerValue];
+    }
+    overallErrorRate = sum / (maxIndex + 1);
 }
 
 - (Note*) currentNote
@@ -90,17 +127,20 @@ const NSInteger BAD = 6;
 // Inspired by http://c2.com/ward/morse/morse.html
 -(void)pickWeightedNote
 {
-    // Figure out the total of the weights...
-    NSArray *working = [notes subarrayWithRange:NSMakeRange(0, maxIndex)];
-    NSInteger sum = [[working valueForKeyPath:@"@sum.errorRate"] integerValue];
+    NSInteger i = 0;
+    NSInteger sum = 0;
+    // Figure out the total of the error rates of the active notes...
+    for (i = 0; i <= maxIndex; i++) {
+        sum += [[[notes objectAtIndex:i] objectForKey:@"errorRate"] integerValue];
+    }
     // ...then a random number in there...
-    sum = arc4random_uniform(sum);
+    sum = arc4random_uniform(sum + 1);
     // ...step through and and subtract each weight until we get to zero and
     // then stop and use that note.
-    NSInteger i = 0;
+    i = 0;
     for (NSDictionary *item in notes) {
         sum -= [[item objectForKey:@"errorRate"] integerValue];
-        if (sum < 0) {
+        if (sum <= 0) {
             break;
         }
         i++;
@@ -112,6 +152,8 @@ const NSInteger BAD = 6;
 {
     [self pickWeightedNote];
 
+    NSLog(@"%@", [self description]);
+
     [delegate noteChanged];
 }
 
@@ -119,15 +161,14 @@ const NSInteger BAD = 6;
 {
     if ([[self currentNote] isEqualToNote:guess]) {
         // Update the weights.
-        overallErrorRate = (overallErrorRate + GOOD) / 2;
         [self adjustErrorRate:-1];
 
         // If they're ready and we have more notes then add one.
-        if (overallErrorRate < 1 && maxIndex < notes.count) {
+        if (overallErrorRate < 2 && maxIndex < (notes.count - 1)) {
             // TODO if we introduce a new note it should always be picked next.
             maxIndex++;
             // Dumb it down a little bit so they don't get overwhelemed
-            overallErrorRate = (overallErrorRate + 2 * BAD) / 2;
+            overallErrorRate = BAD;
         }
 
         [self.delegate guessedRight];
@@ -135,20 +176,18 @@ const NSInteger BAD = 6;
     }
     else {
         // Update the weights.
-        overallErrorRate = (overallErrorRate + BAD) / 2;
-        [self adjustErrorRate:1];
+        [self adjustErrorRate:2];
+        // TODO: we should look at grading them down on the note they guessed
+        // since they had them mixed up.
 
         // Let them try again.
         [self.delegate guessedWrong];
     }
-
-    NSLog(@"graded... working set:\n%@\noverall: %i", [notes subarrayWithRange:NSMakeRange(0, maxIndex)], overallErrorRate);
 }
 
 - (void)timedOut
 {
     // Update the weight.
-    overallErrorRate = (overallErrorRate + BAD) / 2;
     [self adjustErrorRate:1];
 
     // Let them try again.
