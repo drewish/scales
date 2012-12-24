@@ -9,17 +9,6 @@
 #import "NotePlayer.h"
 #import <AssertMacros.h>
 
-
-// some MIDI constants:
-enum {
-	kMIDIMessage_NoteOn    = 0x9,
-	kMIDIMessage_NoteOff   = 0x8,
-};
-
-#define kLowNote  48
-#define kHighNote 72
-#define kMidNote  60
-
 @interface NotePlayer ()
 @property (readwrite) Float64   graphSampleRate;
 @property (readwrite) AUGraph   processingGraph;
@@ -247,14 +236,14 @@ enum {
 - (void) startNote:(NSInteger)note
 {
 	UInt32 noteNum = note;
-	UInt32 onVelocity = 127;
-	UInt32 noteCommand = 	kMIDIMessage_NoteOn << 4 | 0;
+	UInt32 velocity = 96;
+	UInt32 noteCommand = 0x9 << 4 | 0;
 
     _lastNote = note;
 
     OSStatus result = noErr;
 	require_noerr (result = MusicDeviceMIDIEvent (self.samplerUnit, noteCommand,
-                                                  noteNum, onVelocity, 0), logTheError);
+                                                  noteNum, velocity, 0), logTheError);
 
 logTheError:
     if (result != noErr) NSLog (@"Unable to start playing the low note. Error code: %d '%.4s'\n", (int) result, (const char *)&result);
@@ -264,8 +253,8 @@ logTheError:
 - (void) stopNote:(NSInteger)note
 {
 	UInt32 noteNum = note;
-	UInt32 velocity = 127;
-	UInt32 noteCommand = 	kMIDIMessage_NoteOff << 4 | 0;
+	UInt32 velocity = 32;
+	UInt32 noteCommand = 0x8 << 4 | 0;
 
     OSStatus result = noErr;
 	require_noerr (result = MusicDeviceMIDIEvent (self.samplerUnit, noteCommand,
