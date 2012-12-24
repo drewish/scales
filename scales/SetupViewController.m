@@ -69,12 +69,28 @@
         [prefs synchronize];
 
 
+        Note *n;
         NSMutableArray *notes = [NSMutableArray arrayWithCapacity:12];
+
         // C major scale
-        int majorScale[8] = { 0, 2, 4, 5, 7, 9, 11, 12};
+        int majorScale[8] = { 0, 2, 4, 5, 7, 9, 11, 12 };
         for (int i = 0; i < 8; i++) {
             [notes addObject:[Note noteFromMidiNumber:majorScale[i] + ((self.octave + 1) * 12)]];
         }
+
+        // Now stick all the cromatic versions in there.
+        int cromatics[] = { 1, 3, 6, 8, 10 };
+        for (int i = 0; i < 5; i++) {
+            // Sharp
+            n = [Note noteFromMidiNumber:cromatics[i] + ((self.octave + 1) * 12)];
+            n.direction = NoteUp;
+            [notes addObject:n];
+            // Flat
+            n = [Note noteFromMidiNumber:cromatics[i] + ((self.octave + 1) * 12)];
+            n.direction = NoteDown;
+            [notes addObject:n];
+        }
+
 
         // Chromatic scale
 //        for (int i = 0; i < 13; i++) {
