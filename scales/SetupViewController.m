@@ -16,7 +16,6 @@
 
 @implementation SetupViewController
 @synthesize octaveControl;
-@synthesize clefControl;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -48,7 +47,6 @@
 
 - (void)viewDidUnload
 {
-    [self setClefControl:nil];
     [self setOctaveControl:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
@@ -144,14 +142,4 @@
     [octaveControl sendActionsForControlEvents:UIControlEventValueChanged];
 }
 
-- (BOOL)isTreble
-{
-    return clefControl.selectedSegmentIndex == 1;
-}
-
-- (void)setIsTreble:(BOOL)isTreble
-{
-    clefControl.selectedSegmentIndex = (isTreble ? 1 : 0);
-    [clefControl sendActionsForControlEvents:UIControlEventValueChanged];
-}
 @end

@@ -11,9 +11,7 @@
 @interface SetupViewController : UITableViewController
 @property NSInteger octave;
 @property BOOL isTreble;
-@property (weak, nonatomic) IBOutlet UISegmentedControl *clefControl;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *octaveControl;
-- (IBAction)clefChanged:(UISegmentedControl *)sender;
 - (IBAction)octaveChanged:(UISegmentedControl *)sender;
 
 @end

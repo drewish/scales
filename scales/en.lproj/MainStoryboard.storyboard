@@ -216,36 +216,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <sections>
-                            <tableViewSection headerTitle="Clef" id="nA5-Di-wSl">
-                                <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationWidth="0.0" reuseIdentifier="Cleff" rowHeight="41" id="rXy-WX-vZg">
-                                        <rect key="frame" x="0.0" y="46" width="320" height="43"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="10" y="1" width="300" height="40"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="Tmq-vT-cvc">
-                                                    <rect key="frame" x="-1" y="-1" width="302" height="44"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <segments>
-                                                        <segment title="Bass"/>
-                                                        <segment title="Treble"/>
-                                                    </segments>
-                                                    <connections>
-                                                        <action selector="clefChanged:" destination="Utt-X0-4K3" eventType="valueChanged" id="MHQ-6Q-E4v"/>
-                                                    </connections>
-                                                </segmentedControl>
-                                            </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </view>
-                                    </tableViewCell>
-                                </cells>
-                            </tableViewSection>
                             <tableViewSection headerTitle="Octave" id="b2H-hn-Wmd">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationWidth="0.0" rowHeight="41" id="cWY-kF-C4f">
-                                        <rect key="frame" x="0.0" y="135" width="320" height="43"/>
+                                        <rect key="frame" x="0.0" y="46" width="320" height="43"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="10" y="1" width="300" height="40"/>
@@ -275,7 +249,7 @@
                             <tableViewSection headerTitle="" id="Mnb-H0-hrV">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Start" textLabel="XlW-TS-0f2" style="IBUITableViewCellStyleDefault" id="8SY-yW-k7i">
-                                        <rect key="frame" x="0.0" y="198" width="320" height="46"/>
+                                        <rect key="frame" x="0.0" y="109" width="320" height="46"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="10" y="1" width="300" height="43"/>
@@ -307,7 +281,6 @@
                         <barButtonItem key="backBarButtonItem" title="Back" id="LIG-bA-bfy"/>
                     </navigationItem>
                     <connections>
-                        <outlet property="clefControl" destination="Tmq-vT-cvc" id="RTQ-HA-Je9"/>
                         <outlet property="octaveControl" destination="SLi-wQ-e2Z" id="owB-oM-KmQ"/>
                     </connections>
                 </tableViewController>
